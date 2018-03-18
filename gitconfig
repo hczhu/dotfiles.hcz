@@ -57,3 +57,5 @@
   denyCurrentBranch = warn
 [push]
 	default = matching
+[http]
+	proxy = fwdproxy:8080
