@@ -2,8 +2,8 @@
 	editor = vim
 
 [user]
-  name = hczhu
-  email = zhuhcheng@gmail.com
+  # name = 
+  # email = 
 
 [color]
   diff = auto
