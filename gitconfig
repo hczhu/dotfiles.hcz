@@ -1,0 +1,59 @@
+[core]
+	editor = vim
+
+[user]
+  name = hczhu
+  email = zhuhcheng@gmail.com
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+
+[alias]
+  br = branch -v
+  co = checkout
+  ci = commit
+  di = diff
+  st = status
+  showbr = log -U git-svn..
+  cl = clean -d -fx ""
+
+[svn]
+  followparent = true
+
+[log]
+  date = relative
+
+# Use only for black background terminal
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  plain = white
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red blink
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[diff]
+  tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+  df = show --pretty="format:" --name-only
+[merge]
+	tool = vimdiff
+[receive]
+  denyCurrentBranch = warn
+[push]
+	default = matching
