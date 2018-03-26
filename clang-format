@@ -1,0 +1,18 @@
+---
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
+BasedOnStyle: LLVM
+IndentWidth: 2
+---
+Language: Cpp
+# Force pointers to the type for C++.
+DerivePointerAlignment: false
+PointerAlignment: Left
+ColumnLimit: 80
+---
+Language: JavaScript
+# Use 80 columns for JS.
+ColumnLimit: 80
+---
+Language: Proto
+# Don't format .proto files.
+DisableFormat: true
