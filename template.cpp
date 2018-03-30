@@ -9,11 +9,12 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <fstream>
 #include <functional>
 #include <iostream>
 #include <iterator>
-#include <limits>
 #include <limits.h>
+#include <limits>
 #include <map>
 #include <memory>
 #include <mutex>
@@ -26,8 +27,8 @@
 #include <valarray>
 #include <vector>
 
-#include <glog/logging.h>
 #include <gflags/gflags.h>
+#include <glog/logging.h>
 #include <gtest/gtest.h>
 
 template<typename T>

@@ -45,7 +45,7 @@ au BufRead,BufNewFile *.html set filetype=html
 au BufRead,BufNewFile *.test set filetype=test
 
 " C++
-au BufRead,BufNewFile *.cpp,*.cc,*.h,*.hpp set filetype=c++
+au BufRead,BufNewFile *.cpp,*.cc,*.h,*.hpp set filetype=cpp
 
 " Python
 au BufRead,BufNewFile *.py set filetype=python

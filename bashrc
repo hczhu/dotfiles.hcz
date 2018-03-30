@@ -181,7 +181,7 @@ clangFormat() {
   clang-format-3.9
 }
 
-export PYTHONPATH='/usr/local/lib/python3.4/dist-packages'
+export PYTHONPATH='/usr/local/lib/python3.5/dist-packages'
 if ! pgrep -q ssh-agent > /dev/null 2>&1; then
   ssh-agent -s
 fi
@@ -203,3 +203,5 @@ export GCC_FLAGS='-g   -std=gnu++14   -Wall   -Wno-deprecated   -Wdeprecated-dec
 alias make-verb='make VERBOSE=1'
 
 alias format-all-cpp-files="find . -type f '(' -name '*.cpp' -o -name '*.h' -o -name '*.cc' -o -name '*.hpp' ')' -exec clang-format -style=file -i {} \;"
+# for c++ bianry core dump
+ulimit -c unlimited
