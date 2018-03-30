@@ -12,14 +12,6 @@ alias 'grep'='grep --color -a'
 # personal export
 export PATH=$PATH:$HOME/tools/
 
-export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-shopt -s histappend                      # append to history, don't overwrite it
-# Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r;"
-
 # for tmux window titles.
 settitle() {
   title=$(basename $PWD)
@@ -103,9 +95,6 @@ ShowThreadInfo() {
 
 # edit command line in bash by vi
 # set -o vi
-
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
 
 RepeatRunUntilFail() {
   seconds=$1
@@ -203,3 +192,13 @@ export GCC_FLAGS='-g   -std=gnu++14   -Wall   -Wno-deprecated   -Wdeprecated-dec
 alias make-verb='make VERBOSE=1'
 
 alias format-all-cpp-files="find . -type f '(' -name '*.cpp' -o -name '*.h' -o -name '*.cc' -o -name '*.hpp' ')' -exec clang-format -style=file -i {} \;"
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r;"
