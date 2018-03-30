@@ -13,3 +13,7 @@ done
 for vimfile in filetype.vim; do
   ln -f -s $fullPath/$vimfile $HOME/.vim/$vimfile
 done
+
+echo "Installing Tmux Plugin Manager..."
+mkdir -p ~/.tmux/plugins
+tmux source ~/.tmux.conf
