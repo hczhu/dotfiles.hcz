@@ -170,7 +170,7 @@ clangFormat() {
   clang-format-3.9
 }
 
-export PYTHONPATH='/usr/local/lib/python3.4/dist-packages'
+export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages | head -n1)
 if ! pgrep -q ssh-agent > /dev/null 2>&1; then
   ssh-agent -s
 fi
