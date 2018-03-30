@@ -12,14 +12,6 @@ alias 'grep'='grep --color -a'
 # personal export
 export PATH=$PATH:$HOME/tools/
 
-export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-shopt -s histappend                      # append to history, don't overwrite it
-# Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r;"
-
 # for tmux window titles.
 settitle() {
   title=$(basename $PWD)
@@ -104,9 +96,6 @@ ShowThreadInfo() {
 # edit command line in bash by vi
 # set -o vi
 
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-
 RepeatRunUntilFail() {
   seconds=$1
   shift
@@ -181,7 +170,7 @@ clangFormat() {
   clang-format-3.9
 }
 
-export PYTHONPATH='/usr/local/lib/python3.5/dist-packages'
+export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages | head -n1)
 if ! pgrep -q ssh-agent > /dev/null 2>&1; then
   ssh-agent -s
 fi
@@ -205,3 +194,14 @@ alias make-verb='make VERBOSE=1'
 alias format-all-cpp-files="find . -type f '(' -name '*.cpp' -o -name '*.h' -o -name '*.cc' -o -name '*.hpp' ')' -exec clang-format -style=file -i {} \;"
 # for c++ bianry core dump
 ulimit -c unlimited
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r;"
+export nproc=$(lscpu | grep '^CPU(s):' | sed 's/ \+/ /g' | cut -d' ' -f2)

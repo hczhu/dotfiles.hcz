@@ -62,3 +62,7 @@
 [user]
 	name = Kezun Sima
 	email = simakezun@outlook.com
+
+[credential]
+    # helper = store --file /mnt/thumbdrive/.git-credentials
+    helper = cache --timeout 3600
