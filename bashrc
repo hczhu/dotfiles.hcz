@@ -142,7 +142,7 @@ alias perlack-context='perlack -A 3 -B 3'
 # to edit command lines
 set -o vi
 alias ctags-src="ctags -h .thrift.h.H.hh.hpp.hxx.h++.inc.def -R"
-alias Ctags="ctags-src . /usr/local/include /home/ubuntu/github/"
+alias Ctags="ctags-src . /usr/local/include /home/ubuntu/github/ /usr/cpp-source"
 
 alias clang-format-diff="hg diff -U0 -r '.^' -r . | clang-format-diff.py -p 2 -i"
 
