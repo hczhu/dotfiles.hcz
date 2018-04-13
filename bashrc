@@ -1,3 +1,7 @@
+# Don't run anything for other logins, like scp
+if [ -z "$PS1" ]; then
+      return
+fi
 #personal alias
 alias chinese='LANG=zh.utf8'
 #alias arena='killall scim; /usr/lib/jvm/java-6-openjdk/jre/bin/javaws.real ~/mycode/topcoder/ContestAppletProd.jnlp &'
@@ -205,5 +209,6 @@ shopt -s histappend                      # append to history, don't overwrite it
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r;"
 export nproc=$(lscpu | grep '^CPU(s):' | sed 's/ \+/ /g' | cut -d' ' -f2)
+alias make='make -j $(nproc)'
 
 [[ -s /home/ubuntu/.autojump/etc/profile.d/autojump.sh ]] && source /home/ubuntu/.autojump/etc/profile.d/autojump.sh
