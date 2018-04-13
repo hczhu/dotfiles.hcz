@@ -18,47 +18,46 @@ set expandtab
 filetype plugin on
 syntax on
 set foldmethod=indent
-"au FileType javascript,php,cc,lex,cpp,h,proto,borg,y set foldmethod=indent
-au FileType python,py,javascript,php,cc,lex,cpp highlight Folded guibg=blue guifg=green
+"au FileType js,php,cc,lex,cpp,h,proto,borg,y set foldmethod=indent
+"au FileType python,py,js,php,cc,lex,cpp highlight Folded guibg=blue guifg=green
 "set foldlevelstart=30
 set scrolloff=100
 "Use clipboard as default copy
 set clipboard=unnamedplus
 " mystuff
-au FileType sh,html,javascript,php,cc,lex,cpp,c,java,python imap "" ""<Esc>ha
-au FileType sh,html,javascript,php,cc,lex,cpp,c,java,python imap () ()<Esc>ha
-au FileType sh,html,javascript,php,cc,lex,cpp,c,java,python imap [] []<Esc>ha
-au FileType sh,html,javascript,php,cc,lex,cpp,c,java,python imap <> <><Esc>ha
-au FileType sh,html,javascript,php,cc,lex,cpp,c,java,python imap '' ''<Esc>ha
-au FileType sh,html,javascript,php,cc,lex,cpp,c,java imap { {<CR>}<Esc>O
-"au FileType javascript,php,cpp,c,java,python map <C-r> :!gedit %<CR>
+au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap "" ""<Esc>ha
+au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap () ()<Esc>ha
+au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap [] []<Esc>ha
+au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap <> <><Esc>ha
+au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap '' ''<Esc>ha
+au FileType sh,html,js,php,cc,lex,cpp,c,java imap { {<CR>}<Esc>O
+"au FileType js,php,cpp,c,java,python map <C-r> :!gedit %<CR>
 map <F6> <Esc>elDyyp0dwi<BS> = vars.<Esc>j
-au FileType javascript,php,cpp,python map <F3> <Esc>0dwi<BS><Esc>
-"au FileType javascript,php,cpp,python map <F4> 0dwi<BS><CR><Esc>
+au FileType js,php,cpp,python map <F3> <Esc>0dwi<BS><Esc>
+"au FileType js,php,cpp,python map <F4> 0dwi<BS><CR><Esc>
 
+au FileType js,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
+au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -O0 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
 
-au FileType javascript,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
-au FileType javascript,php,cpp map <C-u> :w<CR>:!g++ % -O0 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
-
-au FileType javascript,php,cpp,c map <F5> :!./%:r
-au FileType javascript,php,python map <F5> :!./%
+au FileType js,php,cpp,c map <F5> :!./%:r
+au FileType js,php,python map <F5> :!./%
 "
-"au FileType javascript,php,cpp map <C-u> :w<CR>:!g++ -o %:r -O2 -DNDEBUG -lprofiler -lpthread %;echo "No debug\!\!\!"
-"au FileType javascript,php,cpp map <C-u> :w<CR>:!g++ -o %:r -O2 -DNDEBUG %;echo "No debug\!\!\!"<CR>
-"au FileType javascript,php,c map <C-u> :w<CR>:!gcc -o %:r -O2 -DNDEBUG -lpthread %;echo "No debug\!\!\!"
+"au FileType js,php,cpp map <C-u> :w<CR>:!g++ -o %:r -O2 -DNDEBUG -lprofiler -lpthread %;echo "No debug\!\!\!"
+"au FileType js,php,cpp map <C-u> :w<CR>:!g++ -o %:r -O2 -DNDEBUG %;echo "No debug\!\!\!"<CR>
+"au FileType js,php,c map <C-u> :w<CR>:!gcc -o %:r -O2 -DNDEBUG -lpthread %;echo "No debug\!\!\!"
 
 
-"au FileType javascript,php,java map <C-u> :w<CR>:!javac %<CR>
-au FileType javascript,php,java map <F6> :!java -enableassertions -Xmx1024M %:r
+"au FileType js,php,java map <C-u> :w<CR>:!javac %<CR>
+au FileType js,php,java map <F6> :!java -enableassertions -Xmx1024M %:r
 " check spell
 "
 au FileType tex map <C-b> :w<CR>:!pdflatex %<CR>
-"au FileType javascript,php,tex map <C-r> :w<CR>:!acroread %:r.pdf<CR>
-"au FileType javascript,php,tex imap {} {}<Esc>ha
-"au FileType javascript,php,tex imap [] []<Esc>ha
-"au FileType javascript,php,tex imap () ()<Esc>ha
-"au FileType javascript,php,tex imap $$ $$<Esc>ha
-"au FileType javascript,php,tex set spell
+"au FileType js,php,tex map <C-r> :w<CR>:!acroread %:r.pdf<CR>
+"au FileType js,php,tex imap {} {}<Esc>ha
+"au FileType js,php,tex imap [] []<Esc>ha
+"au FileType js,php,tex imap () ()<Esc>ha
+"au FileType js,php,tex imap $$ $$<Esc>ha
+"au FileType js,php,tex set spell
 autocmd BufNewFile,BufRead *.html,*htm set spell
 command Sb vert sb
 command Cs !echo '<cword>' | aspell -a
@@ -120,3 +119,5 @@ au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format<CR>
 :command! -nargs=* -complete=shellcmd Bash vert new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 au FileType cpp,js,python,bash vmap = :py3file /usr/local/bin/clang-format.py<CR>
+
+autocmd FileType python setlocal tabstop=4
