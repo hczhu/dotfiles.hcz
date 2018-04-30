@@ -14,7 +14,7 @@ alias cl='clear'
 alias 'grep'='grep --color -a'
 
 # personal export
-export PATH=$PATH:$HOME/tools/
+export PATH=$PATH:$HOME/tools/:$HOME/.local/bin
 
 # for tmux window titles.
 settitle() {
