@@ -174,7 +174,7 @@ clangFormat() {
   clang-format-3.9
 }
 
-export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages | head -n1)
+export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages | tail -n1)
 if ! pgrep -q ssh-agent > /dev/null 2>&1; then
   ssh-agent -s
 fi
@@ -212,3 +212,6 @@ export nproc=$(lscpu | grep '^CPU(s):' | sed 's/ \+/ /g' | cut -d' ' -f2)
 alias make='make -j $(nproc)'
 
 [[ -s /home/ubuntu/.autojump/etc/profile.d/autojump.sh ]] && source /home/ubuntu/.autojump/etc/profile.d/autojump.sh
+
+alias python3='PYTHONPATH=/usr/local/lib/python3.5/dist-packages && python3'
+alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
