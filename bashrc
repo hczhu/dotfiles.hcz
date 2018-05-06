@@ -182,10 +182,10 @@ ssh-agent -s
 
 alias mysql-start='sudo /etc/init.d/mysql start'
 alias mysql-stop='sudo /etc/init.d/mysql stop'
-alias mysql-shell='mysql -u root -p'
+alias mysql-shell='mysql'
 alias cpu-num='echo $(nproc)'
 
-export LD_LIBRARY_PATH='/usr/local/lib:/lib:/lib64:/usr/lib'
+export LD_LIBRARY_PATH='/usr/local/lib:/lib:/lib64:/usr/lib:/usr/local/go/bin'
 alias nm='nm --demangle'
 export CPP_LIBS='-Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core  -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lproxygenhttpserver -lproxygenlib -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 -lfolly -lcurl -lboost_context   -lboost_chrono   -lboost_date_time   -lboost_filesystem   -lboost_program_options   -lboost_regex   -lboost_system   -lboost_thread   -lboost_atomic   -lpthread   -ldouble-conversion   -lglog   -levent   -lssl   -lcrypto   -ldouble-conversion   -lglog   -lgflags   -lpthread   -levent   -lssl   -lcrypto   -lz   -llzma   -llz4   -lzstd   -lsnappy   -liberty   -ldl   -lpthread    -lgmock   -lgtest' 
 export GCC_FLAGS='-g   -std=gnu++14   -Wall   -Wno-deprecated   -Wdeprecated-declarations   -Wno-error=deprecated-declarations   -Wno-sign-compare   -Wno-unused   -Wunused-label   -Wunused-result   -Wnon-virtual-dtor   -fopenmp'
