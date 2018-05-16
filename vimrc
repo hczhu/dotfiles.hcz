@@ -25,12 +25,12 @@ set scrolloff=100
 "Use clipboard as default copy
 set clipboard=unnamedplus
 " mystuff
-au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap "" ""<Esc>ha
-au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap () ()<Esc>ha
-au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap [] []<Esc>ha
-au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap <> <><Esc>ha
-au FileType sh,html,js,php,cc,lex,cpp,c,java,python imap '' ''<Esc>ha
-au FileType sh,html,js,php,cc,lex,cpp,c,java imap { {<CR>}<Esc>O
+au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap "" ""<Esc>ha
+au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap () ()<Esc>ha
+au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap [] []<Esc>ha
+au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap <> <><Esc>ha
+au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap '' ''<Esc>ha
+au FileType go,sh,html,js,php,cc,lex,cpp,c,java imap { {<CR>}<Esc>O
 "au FileType js,php,cpp,c,java,python map <C-r> :!gedit %<CR>
 map <F6> <Esc>elDyyp0dwi<BS> = vars.<Esc>j
 au FileType js,php,cpp,python map <F3> <Esc>0dwi<BS><Esc>

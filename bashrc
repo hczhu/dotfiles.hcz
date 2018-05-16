@@ -145,7 +145,7 @@ alias perlack-context='perlack -A 3 -B 3'
 
 # to edit command lines
 set -o vi
-alias ctags-src="ctags -h .thrift.h.H.hh.hpp.hxx.h++.inc.def -R"
+alias ctags-src="ctags -h .thrift.h.H.hh.hpp.hxx.h++.inc.def.go -R"
 alias Ctags="ctags-src . /usr/local/include /home/ubuntu/github/ /usr/cpp-source"
 
 alias clang-format-diff="hg diff -U0 -r '.^' -r . | clang-format-diff.py -p 2 -i"
@@ -187,7 +187,7 @@ alias cpu-num='echo $(nproc)'
 
 export LD_LIBRARY_PATH='/usr/local/lib:/lib:/lib64:/usr/lib'
 alias nm='nm --demangle'
-export CPP_LIBS='-Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core  -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lproxygenhttpserver -lproxygenlib -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 -lfolly -lcurl -lboost_context   -lboost_chrono   -lboost_date_time   -lboost_filesystem   -lboost_program_options   -lboost_regex   -lboost_system   -lboost_thread   -lboost_atomic   -lpthread   -ldouble-conversion   -lglog   -levent   -lssl   -lcrypto   -ldouble-conversion   -lglog   -lgflags   -lpthread   -levent   -lssl   -lcrypto   -lz   -llzma   -llz4   -lzstd   -lsnappy   -liberty   -ldl   -lpthread    -lgmock   -lgtest' 
+export CPP_LIBS='-lproxygenhttpserver -lproxygenlib -Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core  -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 -lfolly -lcurl -lboost_context   -lboost_chrono   -lboost_date_time   -lboost_filesystem   -lboost_program_options   -lboost_regex   -lboost_system   -lboost_thread   -lboost_atomic   -lpthread   -ldouble-conversion   -lglog   -levent   -lssl   -lcrypto   -ldouble-conversion   -lglog   -lgflags   -lpthread   -levent   -lssl   -lcrypto   -lz   -llzma   -llz4   -lzstd   -lsnappy   -liberty   -ldl   -lpthread    -lgmock   -lgtest' 
 export GCC_FLAGS='-g   -std=gnu++14   -Wall   -Wno-deprecated   -Wdeprecated-declarations   -Wno-error=deprecated-declarations   -Wno-sign-compare   -Wno-unused   -Wunused-label   -Wunused-result   -Wnon-virtual-dtor   -fopenmp'
 
 # -lgmock_main -lgtest_main
