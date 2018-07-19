@@ -7,7 +7,11 @@ if [ "$dir" != "." -a "$dir" != "" ]; then
 fi
 for dotfile in clang-format gitignore ctags bashrc gitconfig inputrc template.cpp tmux.conf vimrc;
 do
-  ln -f -s $fullPath/$dotfile $HOME/.$dotfile
+  if [ -r $HOME/.$dotfile ]; then
+    echo "$HOME/.$dotfile already exists! Skipped it."
+  else
+    ln -f -s $fullPath/$dotfile $HOME/.$dotfile
+  fi
 done
 
 for vimfile in filetype.vim; do
@@ -15,6 +19,11 @@ for vimfile in filetype.vim; do
 done
 
 echo "Installing Tmux Plugin Manager..."
-mkdir -p ~/.tmux/plugins
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-tmux source ~/.tmux.conf
+tmuxPluginDir=$HOME/tmux/plugins
+if [ ! -r $tmuxPluginDir ]; then
+  mkdir -p $tmuxPluginDir
+fi
+if [ ! -r $tmuxPluginDir ]; then
+  git clone https://github.com/tmux-plugins/tpm $tmuxPluginDir/tpm
+fi
+tmux source $HOME/.tmux.conf
