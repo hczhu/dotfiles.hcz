@@ -121,3 +121,26 @@ au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
 au FileType cpp,js,python,bash vmap = :py3file /usr/local/bin/clang-format.py<CR>
 
 autocmd FileType python setlocal tabstop=4
+
+" Doesn't work as intended
+command! -nargs=1 Bname r !echo '#<f-args>'
+command! Bn1 r !echo "#1"
+command! Bn2 r !echo "#2"
+command! Bn3 r !echo "#3"
+command! Bn4 r !echo "#4"
+command! Bn5 r !echo "#5"
+command! Bn6 r !echo "#6"
+command! Bn7 r !echo "#7"
+command! Bn8 r !echo "#8"
+command! Bn9 r !echo "#9"
+command! Bn10 r !echo "#10"
+command! Bn11 r !echo "#11"
+command! Bn12 r !echo "#12"
+command! Bn13 r !echo "#13"
+command! Bn14 r !echo "#14"
+command! Bn15 r !echo "#15"
+command! Bn16 r !echo "#16"
+command! Bn17 r !echo "#17"
+command! Bn18 r !echo "#18"
+command! Bn19 r !echo "#19"
+command! Bn20 r !echo "#20"
