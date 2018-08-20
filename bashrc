@@ -31,7 +31,7 @@ set_git_branch() {
 get_git_branch() {
   if [ -r '.git' ]; then 
     echo "($(git branch 2> /dev/null | grep \* | cut -d' ' -f2))"
-  elif [ -r '.hgignore' ]; then
+  elif [ -r '.hg' -o -r '../.hg' ]; then
     echo "($(hg bookmark 2> /dev/null | grep \* | cut -d' ' -f3))"
   fi
 }
@@ -208,7 +208,7 @@ export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 # Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r;"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export nproc=$(lscpu | grep '^CPU(s):' | sed 's/ \+/ /g' | cut -d' ' -f2)
 alias make='make -j $(nproc)'
 
@@ -220,3 +220,4 @@ alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
 export PATH="$PATH:/usr/local/go/bin"
 export PATH=$(echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':')
 export GOMAXPROCS=$nproc
+export Less='2>&1 | less'
