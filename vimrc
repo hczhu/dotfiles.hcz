@@ -122,6 +122,9 @@ au FileType cpp,js,python,bash vmap = :py3file /usr/local/bin/clang-format.py<CR
 
 autocmd FileType python setlocal tabstop=4
 
+" make :!cmd behaves the same as in Shell
+set shellcmdflag=-ic
+
 " Doesn't work as intended
 command! -nargs=1 Bname r !echo '#<f-args>'
 command! Bn1 r !echo "#1"

@@ -220,3 +220,4 @@ alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
 export PATH="$PATH:/usr/local/go/bin"
 export PATH=$(echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':')
 export GOMAXPROCS=$nproc
+export Less='2>&1 | less'
