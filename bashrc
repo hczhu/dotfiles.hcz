@@ -71,9 +71,15 @@ alias L='tmux capture-pane; tmux showb -b 0 | tail -n 3 | head -n 1'
 
 alias tmux-new='tmux new -s'
 
-tmux attach -t work || tmux attach -t hacking || tmux attach -t hack
+attachTmux() {
+  tmux attach -t work || tmux attach -t hacking || tmux attach -t hack
+}
 
-alias ds='date +%s -d'
+attachTmux > /dev/null 2>&1
+
+alias ts='date +%s'
+# example: ds -d '7 days ago'
+alias ds='date +%Y-%m-%d'
 
 alias git-new-br='git checkout --track origin/master -b'
 
@@ -145,8 +151,7 @@ alias perlack-context='perlack -A 3 -B 3'
 
 # to edit command lines
 set -o vi
-alias ctags-src="ctags -h .thrift.h.H.hh.hpp.hxx.h++.inc.def.go -R"
-alias Ctags="ctags-src . /usr/local/include /home/ubuntu/github/ /usr/cpp-source"
+alias ctags-cpp="ctags --languages=C++,thrift -R /usr/include /usr/local/include"
 
 alias clang-format-diff="hg diff -U0 -r '.^' -r . | clang-format-diff.py -p 2 -i"
 
@@ -174,11 +179,10 @@ clangFormat() {
   clang-format-3.9
 }
 
-export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages | tail -n1)
+export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages 2> /dev/null | tail -n1)
 if ! pgrep -q ssh-agent > /dev/null 2>&1; then
-  ssh-agent -s
+  ssh-agent -s > /dev/null 2>&1
 fi
-ssh-agent -s
 
 alias mysql-start='sudo /etc/init.d/mysql start'
 alias mysql-stop='sudo /etc/init.d/mysql stop'
@@ -221,3 +225,4 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH=$(echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':')
 export GOMAXPROCS=$nproc
 export Less='2>&1 | less'
+alias hg-diff-files='hg status --change'
