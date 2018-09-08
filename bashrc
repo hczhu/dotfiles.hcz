@@ -171,7 +171,7 @@ hgCommitFilePattern() {
   hg commit -I **${pat}**
 }
 
-alias rg='rg -p'
+alias rg-p='rg -p'
 alias hg-my-commits='hg log -k "hongcheng zhu"'
 alias clang-format='clang-format-3.9'
 
@@ -226,3 +226,17 @@ export PATH=$(echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':')
 export GOMAXPROCS=$nproc
 export Less='2>&1 | less'
 alias hg-diff-files='hg status --change'
+alias ps-threads=' ps -T -p'
+alias top-threads='top -H -p'
+
+filesMatch() {
+  pattern=$1
+  path=$2
+  rg "$pattern" "$path" | cut -d':' -f1 | sort -u
+}
+
+vimOpenMatchedFiles() {
+  pattern=$1
+  path=$2
+  vim +/"$pattern" $(filesMatch "$pattern" $path)
+}
