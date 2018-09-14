@@ -232,11 +232,33 @@ alias top-threads='top -H -p'
 filesMatch() {
   pattern=$1
   path=$2
-  rg "$pattern" "$path" | cut -d':' -f1 | sort -u
+  rg "$pattern" "$path" | grep "$path" | cut -d':' -f1 | sort -u
 }
 
 vimOpenMatchedFiles() {
   pattern=$1
   path=$2
   vim +/"$pattern" $(filesMatch "$pattern" $path)
+}
+
+vimOpenFileAndLocationWithCommands() {
+  # file:lineNo
+  f_loc=$1
+  shift
+  read f loc <<<$(echo $f_loc | sed 's/:/ /g')
+  vim +:"$loc | $@" $f
+}
+
+function lookup() {
+  echo "$@" | aspell -a
+}
+
+function fixBuildErrors() {
+  testTarget=$1
+  errorFile=$2
+  filePrefix=$(echo $testTarget | sed 's/\.\.\.//; s/:.*$//')
+  for f_loc in $(grep -e "^$filePrefix" $errorFile | cut -d':' -f1,2 | uniq); do
+    searchPattern=$(echo $f_loc | sed 's/\//\\\//g')
+    vimOpenFileAndLocationWithCommands $f_loc ":vs $errorFile | /$searchPattern"
+  done
 }
