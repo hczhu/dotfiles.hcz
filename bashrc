@@ -229,6 +229,10 @@ alias hg-diff-files='hg status --change'
 alias ps-threads=' ps -T -p'
 alias top-threads='top -H -p'
 
+function confirm() {
+  echo "$@ y/N? "
+}
+
 filesMatch() {
   pattern=$1
   path=$2
