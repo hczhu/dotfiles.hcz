@@ -89,11 +89,11 @@ alias git-new-br='git checkout --track origin/master -b'
 #  script -t -a 2> /tmp/terminal-record-time-$$.txt /tmp/terminal-record-$$.txt
 #fi
 
-# VimBinaryDiff() {
-  # vimdiff <(xxd $1) <(xxd $2)
-# }
+function vimBinaryDiff() {
+  vimdiff <(xxd $1) <(xxd $2)
+}
 
-alias vimbdiff='VimBinaryDiff'
+alias vimbdiff='vimBinaryDiff'
 
 ShowThreadInfo() {
   # expect an input pid.
@@ -151,7 +151,8 @@ alias perlack-context='perlack -A 3 -B 3'
 
 # to edit command lines
 set -o vi
-alias ctags-cpp="ctags --languages=C++,thrift -R /usr/include /usr/local/include"
+alias ctags-cpp="ctags --languages=C++,Thrift -R /usr/include /usr/local/include"
+alias ctags-cpp-py="ctags --languages=C++,Thrift,Python -R /usr/include /usr/local/include"
 
 alias clang-format-diff="hg diff -U0 -r '.^' -r . | clang-format-diff.py -p 2 -i"
 
@@ -231,6 +232,11 @@ alias top-threads='top -H -p'
 
 function confirm() {
   echo "$@ y/N? "
+  read y
+  if [ "$y" = "y" ]; then
+    return 0
+  fi
+  return 1
 }
 
 filesMatch() {
@@ -253,6 +259,12 @@ vimOpenFileAndLocationWithCommands() {
   vim +:"$loc | $@" $f
 }
 
+vimOpenFileNameContain() {
+  pattern=$1
+  path=$2
+  vim $(find $path -name "*$pattern*" -print)
+}
+
 function lookup() {
   echo "$@" | aspell -a
 }
@@ -264,5 +276,22 @@ function fixBuildErrors() {
   for f_loc in $(grep -e "^$filePrefix" $errorFile | cut -d':' -f1,2 | uniq); do
     searchPattern=$(echo $f_loc | sed 's/\//\\\//g')
     vimOpenFileAndLocationWithCommands $f_loc ":vs $errorFile | /$searchPattern"
+    if ! confirm Continue to next file; then
+      break
+    fi
   done
 }
+
+function hgVimdiff() {
+  files=$1
+  if [ -z "$files" ]; then
+    files=$(hg status --change . | cut -d' ' -f2)
+  fi
+  echo "Diff files: $files"
+  for f in $files; do
+    vimdiff <(hg cat -r .^ $f) $f
+  done
+}
+
+alias hg-vimdiff=hgVimdiff
+alias hg-head-commit='hg id -i'
