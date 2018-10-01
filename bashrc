@@ -297,5 +297,5 @@ alias hg-vimdiff=hgVimdiff
 alias hg-head-commit='hg id -i'
 
 function purgeBinaries() {
-  find $1 -type f | while read f; do if file $f | grep -q 'ELF 64-bit LSB executable'; then echo "rm $f"; rm -i $f; fi; done
+  find $1 -type f | while read f; do if file $f | grep -q 'ELF 64-bit LSB executable'; then echo "rm $f" && rm $f; fi; done
 }
