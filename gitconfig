@@ -58,7 +58,7 @@
 [push]
 	default = matching
 [http]
-	proxy = fwdproxy:8080
+	# proxy = fwdproxy:8080
 [user]
 	name = Kezun Sima
 	email = simakezun@outlook.com
