@@ -126,6 +126,10 @@ autocmd FileType python setlocal tabstop=4
 " make :!cmd behaves the same as in Shell
 set shellcmdflag=-ic
 
+" Turn off auto indent triggered by : in a Python file
+autocmd FileType python setlocal indentkeys-=<:>
+autocmd FileType python setlocal indentkeys-=:
+
 " Doesn't work as intended
 command! -nargs=1 Bname r !echo '#<f-args>'
 command! Bn1 r !echo "#1"

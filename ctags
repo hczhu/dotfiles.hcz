@@ -6,6 +6,8 @@
 --regex-thrift=/^[ \t]*[a-zA-Z0-9_<>\.]+[ \t]*([a-zA-Z0-9_]+)\(/\1/m,methods/
 --regex-thrift=/^[ \t]*([A-Z0-9_]+)[ \t]*=/\1/C,constants/
 
+--python-kinds=-i
+
 --langmap=javascript:.js.es6.es.jsx
 --javascript-kinds=-c-f-m-p-v
 --regex-javascript=/^[ \t]*(var|let|const)[ \t]+([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\2/A,Array,Arrays/
