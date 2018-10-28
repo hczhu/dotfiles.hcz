@@ -1,8 +1,16 @@
 # Don't run anything for other logins, like scp
-if [ -z "$PS1" ]; then
-      return
+function maybeExit() {
+  if [ -z "${PS1}" ]; then
+    return -1
+  fi
+  return 0
+}
+
+if ! maybeExit 2> /dev/null; then
+  return 0
 fi
-#personal alias
+
+# personal alias
 alias chinese='LANG=zh.utf8'
 #alias arena='killall scim; /usr/lib/jvm/java-6-openjdk/jre/bin/javaws.real ~/mycode/topcoder/ContestAppletProd.jnlp &'
 alias vim='vim -X'
