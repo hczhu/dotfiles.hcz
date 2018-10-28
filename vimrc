@@ -10,10 +10,16 @@
 " #                                        search for the previous instance of the word under the cursor
 "-----------------
 "let $BASH_ENV="~/.bashrc"
+syntax on
 set smartindent
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2
 set expandtab
+set smarttab
+set number
+
+set showmatch
 set hlsearch
 
 filetype plugin on
@@ -62,7 +68,7 @@ au FileType tex map <C-b> :w<CR>:!pdflatex %<CR>
 autocmd BufNewFile,BufRead *.html,*htm set spell
 command Sb vert sb
 command Cs !echo '<cword>' | aspell -a
-command Rg !rg <cword> %:h/
+command Rg !rg -B3 -A3 <cword> %:h/
 command Ls !ls -l <cfile>
 command Number %s/\([0-9]\)[0-9]\{3\}\([^0-9]\|$\)/\1K\2/g | %s/\([0-9]\)[0-9]\{3\}K/\1M/g | %s/\([0-9]\)[0-9]\{3\}M/\1G/g | %s/\([0-9]\)[0-9]\{3\}G/\1T/g | %s/\([0-9]\)[0-9]\{3\}T/\1P/g
 
