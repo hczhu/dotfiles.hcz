@@ -21,6 +21,7 @@ set number
 
 set showmatch
 set hlsearch
+hi Search ctermbg=LightYellow ctermfg=Black
 
 filetype plugin on
 syntax on
@@ -130,7 +131,7 @@ au FileType cpp,js,python,bash vmap = :py3file /usr/local/bin/clang-format.py<CR
 autocmd FileType python setlocal tabstop=4
 
 " make :!cmd behaves the same as in Shell
-set shellcmdflag=-ic
+" set shellcmdflag=-ic
 
 " Turn off auto indent triggered by : in a Python file
 autocmd FileType python setlocal indentkeys-=<:>
