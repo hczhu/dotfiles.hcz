@@ -136,6 +136,8 @@ set shellcmdflag=-ic
 autocmd FileType python setlocal indentkeys-=<:>
 autocmd FileType python setlocal indentkeys-=:
 
+command! Black !black -l 80 %
+
 " Doesn't work as intended
 command! -nargs=1 Bname r !echo '#<f-args>'
 command! Bn1 r !echo "#1"
