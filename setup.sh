@@ -5,6 +5,7 @@ fullPath=$PWD
 if [ "$dir" != "." -a "$dir" != "" ]; then
   fullPath=$fullPath/$dir
 fi
+ln -s $fullPath $HOME/.dotfiles
 for dotfile in clang-format gitignore ctags bashrc gitconfig inputrc template.cpp tmux.conf vimrc;
 do
   if [ -r $HOME/.$dotfile ]; then
