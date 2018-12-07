@@ -112,7 +112,8 @@ ShowThreadInfo() {
 }
 
 # edit command line in bash by vi
-# set -o vi
+set -o vi
+export VISUAL=vim
 
 RepeatRunUntilFail() {
   seconds=$1
@@ -159,8 +160,12 @@ alias perlack-context='perlack -A 3 -B 3'
 
 # to edit command lines
 set -o vi
-alias ctags-cpp="ctags --languages=C++,Thrift -R /usr/include /usr/local/include"
-alias ctags-cpp-py="ctags --languages=C++,Thrift,Python -R /usr/include /usr/local/include"
+alias ctags-cpp='ctags --languages=C++,Thrift -R'
+alias ctags-cpp-local='ctags-cpp /usr/include /usr/local/include'
+
+alias ctags-cpp-py='ctags --languages=C++,Thrift,Python'
+alias ctags-cpp-py-local='ctags-cpp-py -R /usr/include /usr/local/include'
+
 
 alias clang-format-diff="hg diff -U0 -r '.^' -r . | clang-format-diff.py -p 2 -i"
 
@@ -200,7 +205,7 @@ alias cpu-num='echo $(nproc)'
 
 export LD_LIBRARY_PATH='/usr/local/lib:/lib:/lib64:/usr/lib'
 alias nm='nm --demangle'
-export CPP_LIBS='-lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_thread -lboost_atomic -lpthread -ldouble-conversion -lglog -levent -lssl -lcrypto -ldouble-conversion -lglog -lgflags -lpthread -levent -lssl -lcrypto -lz -llzma -llz4 -lzstd -lsnappy -liberty -ldl -lpthread -lgmock -lgtest' 
+export CPP_LIBS='-lthrift -lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_thread -lboost_atomic -lpthread -ldouble-conversion -lglog -levent -lssl -lcrypto -ldouble-conversion -lglog -lgflags -lpthread -levent -lssl -lcrypto -lz -llzma -llz4 -lzstd -lsnappy -liberty -ldl -lpthread -lgmock -lgtest' 
 export ADV_CPP_LIBS="-lproxygenhttpserver -lproxygenlib -Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 $CPP_LIBS"
 export GCC_FLAGS='-g -std=gnu++17 -Wall -Wno-deprecated -Wdeprecated-declarations -Wno-error=deprecated-declarations -Wno-sign-compare -Wno-unused -Wunused-label -Wunused-result -Wnon-virtual-dtor -fopenmp'
 
