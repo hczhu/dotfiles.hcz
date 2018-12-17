@@ -286,8 +286,10 @@ function fixBuildErrors() {
   testTarget=$1
   errorFile=$2
   filePrefix=$(echo $testTarget | sed 's/\.\.\.//; s/:.*$//')
-  for f_loc in $(grep -e "^$filePrefix" $errorFile | cut -d':' -f1,2 | uniq); do
+  echo "Searching for ${filePrefix} in error file: ${errorFile}"
+  for f_loc in $(grep -e "^${filePrefix}[^:]*:[0-9]\+" $errorFile | cut -d':' -f1,2 | uniq); do
     searchPattern=$(echo $f_loc | sed 's/\//\\\//g')
+    echo "Found a file location: ${f_loc}"
     vimOpenFileAndLocationWithCommands $f_loc ":vs $errorFile | /$searchPattern"
     if ! confirm Continue to next file; then
       break
