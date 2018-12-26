@@ -317,3 +317,4 @@ function purgeBinaries() {
 
 alias hg-revert-file='hg revert -r .^'
 alias ps-top-mem='ps aux  --sort=-rss -m | head -n '
+alias atop='atop -m'
