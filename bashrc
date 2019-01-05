@@ -323,3 +323,22 @@ alias ps-top-mem='ps aux  --sort=-rss -m | head -n '
 alias atop='atop -m'
 alias ssh-github-keygen='ssh-keygen -t rsa -b 4096 -C "zhuhcheng@gmail.com"'
 alias apt-search='apt-cache search'
+
+function NonprintableToWhitespaces() {
+  echo "$1" | tr -c '[:print:]\t\r\n' '[ *]'
+}
+
+function Pgrep() {
+  name=$1
+  cmd_part=$2
+  if [ -z "$cmd_part" ]; then
+    cmd_part="$name"
+  fi
+  for pid in $(pgrep "${name}"); do
+    if cat /proc/${pid}/cmdline | grep -q "${cmd_part}"; then
+      echo "$pid - $(cat /proc/${pid}/cmdline | tr -c '[:print:]\t\r\n' '[ *]')"
+    fi
+  done
+}
+
+alias pgrep-name-cmd='Pgrep'
