@@ -238,7 +238,7 @@ alias make='make -j $(nproc)'
 alias python3='PYTHONPATH=/usr/local/lib/python3.5/dist-packages && python3'
 alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
 
-export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:/usr/local/go/bin:/usr/local/mysql/bin"
 export PATH=$(echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':')
 export GOMAXPROCS=$nproc
 export Less='2>&1 | less'
