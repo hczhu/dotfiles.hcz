@@ -176,7 +176,10 @@ hgReverCommit() {
 
 
 # for C++ code
-export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib:/usr/local/lib64"
+
+export LIBRARY_PATH="${LIBRARY_PATH}:/usr/local/lib:/usr/local/lib64"
+export LIBRARY_PATH=$(echo ${LIBRARY_PATH} | sed 's/:/\n/g' | sed '/^$/d' | sort -u | tr '\n' ':' | sed 's/:$//')
+
 export CPATH="$CPATH:/usr/local/include"
 export GLOG_logtostderr=1
 
