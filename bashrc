@@ -336,9 +336,13 @@ function Pgrep() {
   fi
   for pid in $(pgrep "${name}"); do
     if cat /proc/${pid}/cmdline | grep -q "${cmd_part}"; then
-      echo "$pid - $(cat /proc/${pid}/cmdline | tr -c '[:print:]\t\r\n' '[ *]')"
+      echo -e "$pid\t$(cat /proc/${pid}/cmdline | tr -c '[:print:]\t\r\n' '[ *]')"
     fi
   done
 }
 
 alias pgrep-name-cmd='Pgrep'
+
+if ! Pgrep mosh | grep -q ""; then
+  mosh-server new -c 256 -s -l LANG=en_US.UTF-8
+fi

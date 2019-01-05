@@ -10,25 +10,25 @@ maybeCreateDir() {
   fi
 }
 
-progname=$(basename "$0")
-dirname=$(cd "$(dirname "$0")" || exit 1; pwd -P)
+prog_name=$(basename "$0")
+dir_name=$(cd "$(dirname "$0")" || exit 1; pwd -P)
 
 if [ -r ${HOME}/.dotfiles ]; then
   rm -i ${HOME}/.dotfiles
 fi
-ln -s ${dirname} ${HOME}/.dotfiles
+ln -s ${dir_name} ${HOME}/.dotfiles
 for dotfile in clang-format gitignore ctags bashrc gitconfig inputrc template.cpp tmux.conf vimrc; do
   if [ -r ${HOME}/.${dotfile} ]; then
     echo "${HOME}/.${dotfile} already exists! Skipped it."
   else
-    ln -f -s ${dirname}/${dotfile} ${HOME}/.${dotfile}
+    ln -f -s ${dir_name}/${dotfile} ${HOME}/.${dotfile}
   fi
 done
 
 maybeCreateDir ${HOME}/.vim
 
 for vimfile in filetype.vim; do
-  ln -f -s ${dirname}/${vimfile} ${HOME}/.vim/${vimfile}
+  ln -f -s ${dir_name}/${vimfile} ${HOME}/.vim/${vimfile}
 done
 
 echo "Installing Tmux Plugin Manager..."
@@ -43,3 +43,7 @@ if [ ! -r ${tmuxPluginDir} ]; then
   git clone https://github.com/tmux-plugins/tpm ${tmuxPluginDir}/tpm
 fi
 tmux source ${HOME}/.tmux.conf
+
+if [ ! -r ${HOME}/.ssh/config ]; then
+  ln -s ${dir_name}/ssh_config ${HOME}/.ssh/config
+fi
