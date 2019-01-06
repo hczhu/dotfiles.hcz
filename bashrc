@@ -347,10 +347,6 @@ if ! Pgrep mosh | grep -q ""; then
   mosh-server new -c 256 -s -l LANG=en_US.UTF-8
 fi
 
-if [ -r ${HOME}/.dotfiles/bashrc ]; then
-  source ${HOME}/.dotfiles/bashrc
-fi
+alias run-ssh-agent='eval $(ssh-agent)'
 
-alias ssh-agent='eval $(ssh-agent)'
-
-alias set-hostname='hostnamectl set-hostname'
+alias change-hostname='hostnamectl set-hostname'
