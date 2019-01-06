@@ -352,3 +352,5 @@ if [ -r ${HOME}/.dotfiles/bashrc ]; then
 fi
 
 alias ssh-agent='eval $(ssh-agent)'
+
+alias set-hostname='hostnamectl set-hostname'
