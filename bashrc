@@ -32,7 +32,6 @@ settitle() {
   printf "\033k$title\033\\"
 }
 
-PROMPT_COMMAND="settitle; $PROMPT_COMMAND"
 
 set_git_branch() {
   export GIT_BRANCH=$(get_git_branch)
@@ -49,11 +48,20 @@ get_git_branch() {
 # PROMPT_COMMAND="set_git_branch; $PROMPT_COMMAND"
 # PROMPT_COMMAND=""
 
-setPS1() {
-  export PS1='[\u@\h \w$(get_git_branch)] ';
+function prependIfNotHave() {
+  patten="$1"
+  value="$2"
+  if echo "$value" | grep -q "$pattern"; then
+    echo "${pattern} ${value}"
+  else
+    echo "${value}"
+  fi
 }
 
-setPS1
+export PROMPT_COMMAND=$(prependIfNotHave "settitle;" "$PROMPT_COMMAND")
+export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
+
+export PS1='[\u@\h \w$(get_git_branch)] ';
 
 # Input method
 #export XIM="SCIM"
@@ -231,7 +239,6 @@ export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 # Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export nproc=$(lscpu | grep '^CPU(s):' | sed 's/ \+/ /g' | cut -d' ' -f2)
 alias make='make -j $(nproc)'
 
