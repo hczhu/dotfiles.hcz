@@ -1,4 +1,6 @@
 # Don't run anything for other logins, like scp
+
+# set -ex
 function maybeExit() {
   if [ -z "${PS1}" ]; then
     return -1
@@ -30,7 +32,6 @@ settitle() {
   printf "\033k$title\033\\"
 }
 
-PROMPT_COMMAND="settitle; $PROMPT_COMMAND"
 
 set_git_branch() {
   export GIT_BRANCH=$(get_git_branch)
@@ -47,11 +48,20 @@ get_git_branch() {
 # PROMPT_COMMAND="set_git_branch; $PROMPT_COMMAND"
 # PROMPT_COMMAND=""
 
-setPS1() {
-  export PS1='[\u@\h \w$(get_git_branch)] ';
+function prependIfNotHave() {
+  patten="$1"
+  value="$2"
+  if echo "$value" | grep -q "$pattern"; then
+    echo "${pattern} ${value}"
+  else
+    echo "${value}"
+  fi
 }
 
-setPS1
+export PROMPT_COMMAND=$(prependIfNotHave "settitle;" "$PROMPT_COMMAND")
+export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
+
+export PS1='[\u@\h \w$(get_git_branch)] ';
 
 # Input method
 #export XIM="SCIM"
@@ -80,7 +90,10 @@ alias L='tmux capture-pane; tmux showb -b 0 | tail -n 3 | head -n 1'
 alias tmux-new='tmux new -s'
 
 attachTmux() {
-  tmux attach -t work || tmux attach -t hacking || tmux attach -t hack
+  if [ -z "$_IN_TMUX" ]; then
+    tmux attach -t work || tmux attach -t hacking || tmux attach -t hack
+    export _IN_TMUX='tmux-attached'
+  fi
 }
 
 attachTmux > /dev/null 2>&1
@@ -197,9 +210,9 @@ clangFormat() {
 }
 
 export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages 2> /dev/null | tail -n1)
-if ! pgrep -q ssh-agent > /dev/null 2>&1; then
-  ssh-agent -s > /dev/null 2>&1
-fi
+# if ! pgrep -q ssh-agent > /dev/null 2>&1; then
+  # ssh-agent -s > /dev/null 2>&1
+# fi
 
 alias mysql-start='sudo /etc/init.d/mysql start'
 alias mysql-stop='sudo /etc/init.d/mysql stop'
@@ -229,7 +242,6 @@ export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 # Save and reload the history after each command finishes
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export nproc=$(lscpu | grep '^CPU(s):' | sed 's/ \+/ /g' | cut -d' ' -f2)
 alias make='make -j $(nproc)'
 
