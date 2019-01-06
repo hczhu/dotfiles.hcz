@@ -348,3 +348,5 @@ if ! Pgrep mosh | grep -q ""; then
 fi
 
 alias ssh-agent='eval $(ssh-agent)'
+
+alias set-hostname='hostnamectl set-hostname'
