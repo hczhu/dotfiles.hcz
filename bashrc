@@ -90,10 +90,13 @@ alias L='tmux capture-pane; tmux showb -b 0 | tail -n 3 | head -n 1'
 alias tmux-new='tmux new -s'
 
 attachTmux() {
-  tmux attach -t work || tmux attach -t hacking || tmux attach -t hack
+  if [ -z "$_IN_TMUX" ]; then
+    tmux attach -t work || tmux attach -t hacking || tmux attach -t hack
+    export _IN_TMUX='tmux-attached'
+  fi
 }
 
-# attachTmux > /dev/null 2>&1
+attachTmux > /dev/null 2>&1
 
 alias ts='date +%s'
 # example: ds -d '7 days ago'
