@@ -1,4 +1,6 @@
 # Don't run anything for other logins, like scp
+
+# set -ex
 function maybeExit() {
   if [ -z "${PS1}" ]; then
     return -1
@@ -83,7 +85,7 @@ attachTmux() {
   tmux attach -t work || tmux attach -t hacking || tmux attach -t hack
 }
 
-attachTmux > /dev/null 2>&1
+# attachTmux > /dev/null 2>&1
 
 alias ts='date +%s'
 # example: ds -d '7 days ago'
@@ -197,9 +199,9 @@ clangFormat() {
 }
 
 export PYTHONPATH=$(ls -d /usr/local/lib/python3*/dist-packages 2> /dev/null | tail -n1)
-if ! pgrep -q ssh-agent > /dev/null 2>&1; then
-  ssh-agent -s > /dev/null 2>&1
-fi
+# if ! pgrep -q ssh-agent > /dev/null 2>&1; then
+  # ssh-agent -s > /dev/null 2>&1
+# fi
 
 alias mysql-start='sudo /etc/init.d/mysql start'
 alias mysql-stop='sudo /etc/init.d/mysql stop'
