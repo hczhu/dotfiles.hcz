@@ -359,6 +359,6 @@ if ! Pgrep mosh | grep -q ""; then
   mosh-server new -c 256 -s -l LANG=en_US.UTF-8
 fi
 
-alias ssh-agent='eval $(ssh-agent)'
+alias start-ssh-agent='eval $(ssh-agent)'
 
 alias set-hostname='hostnamectl set-hostname'
