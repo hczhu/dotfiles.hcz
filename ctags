@@ -6,6 +6,8 @@
 --regex-thrift=/^[ \t]*[a-zA-Z0-9_<>\.]+[ \t]*([a-zA-Z0-9_]+)\(/\1/m,methods/
 --regex-thrift=/^[ \t]*([A-Z0-9_]+)[ \t]*=/\1/C,constants/
 
+--regex-c++=/^using ([a-zA-Z0-9_]+)[ \t]*=/\1/T,types/
+
 --python-kinds=-i
 
 --exclude=.git

@@ -1,30 +1,49 @@
 #/bin/bash
 
-dir=$(dirname "$0")
-fullPath=$PWD
-if [ "$dir" != "." -a "$dir" != "" ]; then
-  fullPath=$fullPath/$dir
+set -ex
+
+maybeCreateDir() {
+  dir=$1
+  if [ ! -r ${dir} ]; then
+    echo "Creating ${dir}"
+    mkdir -p ${dir}
+  fi
+}
+
+prog_name=$(basename "$0")
+dir_name=$(cd "$(dirname "$0")" || exit 1; pwd -P)
+
+if [ -r ${HOME}/.dotfiles ]; then
+  rm -i ${HOME}/.dotfiles
 fi
-ln -s $fullPath $HOME/.dotfiles
-for dotfile in clang-format gitignore ctags bashrc gitconfig inputrc template.cpp tmux.conf vimrc;
-do
-  if [ -r $HOME/.$dotfile ]; then
-    echo "$HOME/.$dotfile already exists! Skipped it."
+ln -s ${dir_name} ${HOME}/.dotfiles
+for dotfile in clang-format gitignore ctags bashrc gitconfig inputrc template.cpp tmux.conf vimrc; do
+  if [ -r ${HOME}/.${dotfile} ]; then
+    echo "${HOME}/.${dotfile} already exists! Skipped it."
   else
-    ln -f -s $fullPath/$dotfile $HOME/.$dotfile
+    ln -f -s ${dir_name}/${dotfile} ${HOME}/.${dotfile}
   fi
 done
 
+maybeCreateDir ${HOME}/.vim
+
 for vimfile in filetype.vim; do
-  ln -f -s $fullPath/$vimfile $HOME/.vim/$vimfile
+  ln -f -s ${dir_name}/${vimfile} ${HOME}/.vim/${vimfile}
 done
 
 echo "Installing Tmux Plugin Manager..."
-tmuxPluginDir=$HOME/tmux/plugins
-if [ ! -r $tmuxPluginDir ]; then
-  mkdir -p $tmuxPluginDir
+
+maybeCreateDir ${HOME}/tmux/plugins
+
+tmuxPluginDir=${HOME}/tmux/plugins
+if [ ! -r ${tmuxPluginDir} ]; then
+  mkdir -p ${tmuxPluginDir}
 fi
-if [ ! -r $tmuxPluginDir ]; then
-  git clone https://github.com/tmux-plugins/tpm $tmuxPluginDir/tpm
+if [ ! -r ${tmuxPluginDir} ]; then
+  git clone https://github.com/tmux-plugins/tpm ${tmuxPluginDir}/tpm
 fi
-tmux source $HOME/.tmux.conf
+tmux source ${HOME}/.tmux.conf
+
+if [ ! -r ${HOME}/.ssh/config ]; then
+  ln -s ${dir_name}/ssh_config ${HOME}/.ssh/config
+fi
