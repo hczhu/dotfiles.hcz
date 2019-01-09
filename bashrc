@@ -378,4 +378,5 @@ setupSwapFile() {
   if ! grep -q '/swapfile.swap.swap' /etc/fstab; then
     sudo echo -e "/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab
   fi
+  sudo swapon --show
 }
