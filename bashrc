@@ -362,3 +362,19 @@ fi
 alias run-ssh-agent='eval $(ssh-agent)'
 
 alias change-hostname='hostnamectl set-hostname'
+
+setupSwapFile() {
+  sudo swapoff -a
+  size_gb=$1
+  if [ -z "$size_gb" ]; then
+    size_gb=1
+  fi
+  sudo fallocate -l ${size_gb}G /swapfile
+  sudo dd if=/dev/zero of=/swapfile bs=1024 count=$((size_gb * 1024**3 / 1024))
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+  if ! grep -q '/swapfile.swap.swap' /etc/fstab; then
+    sudo echo -e "/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab
+  fi
+}
