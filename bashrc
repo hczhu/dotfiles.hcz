@@ -332,6 +332,7 @@ function purgeBinaries() {
 
 alias hg-revert-file='hg revert -r .^'
 alias ps-top-mem='ps aux  --sort=-rss -m | head -n '
+alias list-sockets='ss -rpetb'
 alias atop='atop -m'
 alias ssh-github-keygen='ssh-keygen -t rsa -b 4096 -C "zhuhcheng@gmail.com"'
 alias apt-search='apt-cache search'
