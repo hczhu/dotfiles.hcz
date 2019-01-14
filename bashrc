@@ -49,12 +49,12 @@ get_git_branch() {
 # PROMPT_COMMAND=""
 
 function prependIfNotHave() {
-  patten="$1"
+  pattern="$1"
   value="$2"
   if echo "$value" | grep -q "$pattern"; then
-    echo "${pattern} ${value}"
-  else
     echo "${value}"
+  else
+    echo "${pattern} ${value}"
   fi
 }
 
