@@ -17,7 +17,7 @@ if [ -r ${HOME}/.dotfiles ]; then
   rm -i ${HOME}/.dotfiles
 fi
 ln -s ${dir_name} ${HOME}/.dotfiles
-for dotfile in clang-format gitignore ctags bashrc gitconfig inputrc template.cpp tmux.conf vimrc; do
+for dotfile in clang-format gitignore ctags bashrc gitconfig inputrc template.cpp tmux.conf vimrc hgrc; do
   if [ -r ${HOME}/.${dotfile} ]; then
     echo "${HOME}/.${dotfile} already exists! Skipped it."
   else
