@@ -140,6 +140,10 @@ autocmd FileType python setlocal indentkeys-=:
 
 command! Black !black -l 80 %
 
+" When enter vim, map caps lock to escape. Revert the change when exit vim
+au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
 " ctags
 map <C-]> :vsp <CR>:exec("ts ".expand("<cword>"))<CR>
 
