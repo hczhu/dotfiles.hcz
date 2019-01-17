@@ -146,6 +146,9 @@ imap fj <Esc>
 " ctags
 map <C-]> :vsp <CR>:exec("ts ".expand("<cword>"))<CR>
 
+" \s to substitue the word under the cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 " Doesn't work as intended
 command! -nargs=1 Bname r !exec("echo"  .expand("#<f-args>"))
 " Current buffer name
