@@ -380,3 +380,7 @@ setupSwapFile() {
   fi
   sudo swapon --show
 }
+
+function searchForSymbol() {
+  for lib in $(ls /usr/local/lib/lib*.a); do echo $lib; nm $lib | grep "$1"; done | less -r
+}
