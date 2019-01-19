@@ -142,7 +142,7 @@ RepeatRunUntilFail() {
   done
 }
 
-export HGEDITOR='HgEditor() { file=$1; $HOME/git-hooks/prepare-commit-msg $file template; vim $file; } && HgEditor'
+# export HGEDITOR='HgEditor() { file=$1; $HOME/git-hooks/prepare-commit-msg $file template; vim $file; } && HgEditor'
 alias diff-sum='diff -wbBdu'
 alias hg-blame='hg blame -dupw'
 alias hg-master='hg update master'
