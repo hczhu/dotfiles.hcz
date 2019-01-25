@@ -384,3 +384,7 @@ setupSwapFile() {
 function searchForSymbol() {
   for lib in $(ls /usr/local/lib/lib*.a); do echo $lib; nm $lib | grep "$1"; done | less -r
 }
+
+alias cp='cp --backup=numbered'
+alias ln='ln --backup=numbered'
+alias mv='mv -f --backup=numbered'
