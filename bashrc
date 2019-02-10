@@ -59,7 +59,8 @@ function prependIfNotHave() {
 }
 
 export PROMPT_COMMAND=$(prependIfNotHave "settitle;" "$PROMPT_COMMAND")
-export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
+export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
+# export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
 export PS1='[\u@\h \w$(get_git_branch)] ';
 
@@ -142,7 +143,7 @@ RepeatRunUntilFail() {
   done
 }
 
-export HGEDITOR='HgEditor() { file=$1; $HOME/git-hooks/prepare-commit-msg $file template; vim $file; } && HgEditor'
+# export HGEDITOR='HgEditor() { file=$1; $HOME/git-hooks/prepare-commit-msg $file template; vim $file; } && HgEditor'
 alias diff-sum='diff -wbBdu'
 alias hg-blame='hg blame -dupw'
 alias hg-master='hg update master'
@@ -238,8 +239,8 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
+export HISTSIZE=1000000                   # big big history
+export HISTFILESIZE=10000000              # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 # Save and reload the history after each command finishes
 export nproc=$(lscpu | grep '^CPU(s):' | sed 's/ \+/ /g' | cut -d' ' -f2)
@@ -385,6 +386,7 @@ function searchForSymbol() {
   for lib in $(ls /usr/local/lib/lib*.a); do echo $lib; nm -C --defined-only $lib | grep "$1"; done | less -r
 }
 
+<<<<<<< HEAD
 alias git-ci='git commit -am'
 alias git-ci-push='git-ci "update" && git push'
 
@@ -393,3 +395,8 @@ portListener() {
 }
 
 alias git-st='git st -uno'
+=======
+alias cp='cp --backup=numbered'
+alias ln='ln --backup=numbered'
+alias mv='mv -f --backup=numbered'
+>>>>>>> 986438b816cdf868b703cf0acbdaea14ac04d899
