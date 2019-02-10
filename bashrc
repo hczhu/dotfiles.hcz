@@ -386,6 +386,7 @@ function searchForSymbol() {
 }
 
 alias git-ci='git commit -am'
+alias git-ci-push='git-ci "update" && git push'
 
 portListener() {
   sudo lsof -i :$1
