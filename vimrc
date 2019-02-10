@@ -46,7 +46,7 @@ au FileType js,php,cpp,python map <F3> <Esc>0dwi<BS><Esc>
 "au FileType js,php,cpp,python map <F4> 0dwi<BS><CR><Esc>
 
 au FileType js,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
-au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -O0 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
+au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -ggdb3 -DDEBUG $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
 
 au FileType js,php,cpp,c map <F5> :!./%:r
 au FileType js,php,python map <F5> :!./%

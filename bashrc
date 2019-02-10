@@ -382,5 +382,13 @@ setupSwapFile() {
 }
 
 function searchForSymbol() {
-  for lib in $(ls /usr/local/lib/lib*.a); do echo $lib; nm $lib | grep "$1"; done | less -r
+  for lib in $(ls /usr/local/lib/lib*.a); do echo $lib; nm -C --defined-only $lib | grep "$1"; done | less -r
 }
+
+alias git-ci='git commit -am'
+
+portListener() {
+  sudo lsof -i :$1
+}
+
+alias git-st='git st -uno'
