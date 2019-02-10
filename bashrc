@@ -386,7 +386,6 @@ function searchForSymbol() {
   for lib in $(ls /usr/local/lib/lib*.a); do echo $lib; nm -C --defined-only $lib | grep "$1"; done | less -r
 }
 
-<<<<<<< HEAD
 alias git-ci='git commit -am'
 alias git-ci-push='git-ci "update" && git push'
 
@@ -395,8 +394,7 @@ portListener() {
 }
 
 alias git-st='git st -uno'
-=======
+
 alias cp='cp --backup=numbered'
 alias ln='ln --backup=numbered'
 alias mv='mv -f --backup=numbered'
->>>>>>> 986438b816cdf868b703cf0acbdaea14ac04d899
