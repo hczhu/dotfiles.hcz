@@ -127,7 +127,7 @@ au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format-3.9
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format<CR>
 :command! -nargs=* -complete=shellcmd Bash vert new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
-au FileType cpp,js,python,bash vmap = :py3file /usr/local/bin/clang-format.py<CR>
+au FileType cpp,cc,h,tcc vmap = :py3file /usr/local/bin/clang-format.py<CR>
 
 autocmd FileType python setlocal tabstop=4
 
@@ -139,6 +139,7 @@ autocmd FileType python setlocal indentkeys-=<:>
 autocmd FileType python setlocal indentkeys-=:
 
 command! Black !black -l 80 %
+command! Gofmt !gofmt -w %
 
 " fj for escape
 imap fj <Esc>

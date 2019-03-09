@@ -55,3 +55,6 @@ au BufRead,BufNewFile *.sh set filetype=bash
 
 " Javascript
 au BufRead,BufNewFile *.js set filetype=js
+
+" Go
+au BufRead,BufNewFile *.go set filetype=go
