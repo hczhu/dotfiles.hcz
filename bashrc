@@ -359,6 +359,7 @@ alias pgrep-name-cmd='Pgrep'
 
 function startMoshServer() {
   if ! Pgrep mosh | grep -q ""; then
+    echo "No mosh server running. Starting a new one..."
     mosh-server new -c 256 -s -l LANG=en_US.UTF-8
   fi
 }
