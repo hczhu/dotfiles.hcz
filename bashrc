@@ -97,7 +97,7 @@ attachTmux() {
   fi
 }
 
-attachTmux > /dev/null 2>&1
+# attachTmux > /dev/null 2>&1
 
 alias ts='date +%s'
 # example: ds -d '7 days ago'
@@ -357,9 +357,12 @@ function Pgrep() {
 
 alias pgrep-name-cmd='Pgrep'
 
-if ! Pgrep mosh | grep -q ""; then
-  mosh-server new -c 256 -s -l LANG=en_US.UTF-8
-fi
+function startMoshServer() {
+  if ! Pgrep mosh | grep -q ""; then
+    echo "No mosh server running. Starting a new one..."
+    mosh-server new -c 256 -s -l LANG=en_US.UTF-8
+  fi
+}
 
 alias run-ssh-agent='eval $(ssh-agent)'
 
