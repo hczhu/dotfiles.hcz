@@ -58,7 +58,6 @@ function prependIfNotHave() {
   fi
 }
 
-export PROMPT_COMMAND=$(prependIfNotHave "settitle;" "$PROMPT_COMMAND")
 export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
 # export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
@@ -358,6 +357,7 @@ function Pgrep() {
 alias pgrep-name-cmd='Pgrep'
 
 function startMoshServer() {
+  # pkill mosh
   if ! Pgrep mosh | grep -q ""; then
     echo "No mosh server running. Starting a new one..."
     mosh-server new -c 256 -s -l LANG=en_US.UTF-8
