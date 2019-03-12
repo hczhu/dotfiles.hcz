@@ -67,7 +67,7 @@ au FileType tex map <C-b> :w<CR>:!pdflatex %<CR>
 "au FileType js,php,tex imap () ()<Esc>ha
 "au FileType js,php,tex imap $$ $$<Esc>ha
 "au FileType js,php,tex set spell
-autocmd BufNewFile,BufRead *.html,*htm set spell
+" autocmd BufNewFile,BufRead *.html,*htm set spell
 command Sb vert sb
 command Cs !echo '<cword>' | aspell -a
 command Rg !rg -B3 -A3 <cword> %:h/
@@ -102,6 +102,7 @@ nmap :Q :q
 map Q gq
 
 "set spell
+set nospell
 
 "set path
 "set path+=../
