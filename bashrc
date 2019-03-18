@@ -58,7 +58,6 @@ function prependIfNotHave() {
   fi
 }
 
-export PROMPT_COMMAND=$(prependIfNotHave "settitle;" "$PROMPT_COMMAND")
 export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
 # export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
@@ -97,7 +96,7 @@ attachTmux() {
   fi
 }
 
-attachTmux > /dev/null 2>&1
+# attachTmux > /dev/null 2>&1
 
 alias ts='date +%s'
 # example: ds -d '7 days ago'
@@ -357,9 +356,13 @@ function Pgrep() {
 
 alias pgrep-name-cmd='Pgrep'
 
-if ! Pgrep mosh | grep -q ""; then
-  mosh-server new -c 256 -s -l LANG=en_US.UTF-8
-fi
+function startMoshServer() {
+  # pkill mosh
+  if ! Pgrep mosh | grep -q ""; then
+    echo "No mosh server running. Starting a new one..."
+    mosh-server new -c 256 -s -l LANG=en_US.UTF-8
+  fi
+}
 
 alias run-ssh-agent='eval $(ssh-agent)'
 
@@ -399,3 +402,6 @@ alias cp='cp --backup=numbered'
 alias ln='ln --backup=numbered'
 alias mv='mv -f --backup=numbered'
 alias git-submodule-update='git submodule update --init --recursive'
+alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
+alias cron-edit='crontab -e'
+alias datadog-restart='sudo systemctl restart datadog-agent'
