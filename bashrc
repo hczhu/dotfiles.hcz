@@ -405,3 +405,5 @@ alias git-submodule-update='git submodule update --init --recursive'
 alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
 alias cron-edit='crontab -e'
 alias datadog-restart='sudo systemctl restart datadog-agent'
+
+export PATH=/usr/local/bin:$PATH
