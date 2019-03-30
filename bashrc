@@ -173,11 +173,11 @@ alias perlack-context='perlack -A 3 -B 3'
 
 # to edit command lines
 set -o vi
-alias ctags-cpp='ctags --languages=C++,Thrift -R'
+alias ctags-cpp='ctags -R --languages=C++,Thrift'
 alias ctags-cpp-local='ctags-cpp /usr/include /usr/local/include'
 
-alias ctags-cpp-py='ctags --languages=C++,Thrift,Python'
-alias ctags-cpp-py-local='ctags-cpp-py -R /usr/include /usr/local/include'
+alias ctags-cpp-py='ctags-cpp --languages=C++,Thrift,Python'
+alias ctags-cpp-py-local='ctags-cpp-py /usr/include /usr/local/include'
 
 
 alias clang-format-diff="hg diff -U0 -r '.^' -r . | clang-format-diff.py -p 2 -i"
@@ -405,3 +405,5 @@ alias git-submodule-update='git submodule update --init --recursive'
 alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
 alias cron-edit='crontab -e'
 alias datadog-restart='sudo systemctl restart datadog-agent'
+
+export PATH=/usr/local/bin:$PATH

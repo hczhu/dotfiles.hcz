@@ -1,6 +1,8 @@
 # Press up-arrow for previous matching command
 "\e[A":history-search-backward
-# # Press down-arrow for next matching command
+# Press down-arrow for next matching command
 "\e[B":history-search-forward
+# control-w to delete word
+"\C-w":backward-delete-word
 
 set editing-mode vi
