@@ -29,8 +29,8 @@
 
 #include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
-// #include <gtest/gmock.h>
 
 template<typename T>
 class _DisplayType;
@@ -42,7 +42,13 @@ void _displayType(T&& t);
 
 /* template end */
 
-TEST(Foo, Bar) {
+class FooTest : public testing::Test {
+ protected:
+  void SetUp() override {}
+  void TearDown() override {}
+};
+
+TEST_F(FooTest, Bar) {
 }
 
 int main(int argc, char* argv[]) {
