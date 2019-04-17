@@ -39,10 +39,11 @@ set_git_branch() {
 
 get_git_branch() {
   if [ -r '.git' ]; then 
-    echo "($(git branch 2> /dev/null | grep \* | cut -d' ' -f2))"
+    tag=$(git branch 2> /dev/null | grep \* | cut -d' ' -f2)
   elif [ -r '.hg' -o -r '../.hg' ]; then
-    echo "($(hg bookmark 2> /dev/null | grep \* | cut -d' ' -f3))"
+    tag=$(hg bookmark 2> /dev/null | grep \* | cut -d' ' -f3)
   fi
+  echo $(echo "(${tag})" | sed 's/\n/ /g;s/\t/ /g;')
 }
 
 # PROMPT_COMMAND="set_git_branch; $PROMPT_COMMAND"
