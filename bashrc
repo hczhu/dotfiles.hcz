@@ -418,3 +418,4 @@ function hgBackOut() {
 }
 
 alias hg-back-out='hgBackOut'
+alias kill-mosh-server='kill $(pidof mosh-server)'
