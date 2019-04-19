@@ -408,3 +408,13 @@ alias cron-edit='crontab -e'
 alias datadog-restart='sudo systemctl restart datadog-agent'
 
 export PATH=/usr/local/bin:$PATH
+
+function hgBackOut() {
+  r=$1
+  hg show ${r}
+  if confirm "Back out this commit?"; then
+    hg strip --keep -r ${r}
+  fi
+}
+
+alias hg-back-out='hgBackOut'
