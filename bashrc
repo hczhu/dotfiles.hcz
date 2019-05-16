@@ -418,3 +418,5 @@ function hgBackOut() {
 }
 
 alias hg-back-out='hgBackOut'
+
+alias rg-context='rg -A5 -B5'
