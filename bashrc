@@ -270,14 +270,21 @@ function confirm() {
 
 filesMatch() {
   pattern=$1
-  path=$2
-  rg "$pattern" "$path" | grep "$path" | cut -d':' -f1 | sort -u
+  path_or_files="$2"
+  # echo "${path_or_files}"
+  # echo ""
+  for path_or_file in $(echo ${path_or_files}); do
+    # echo Searching "$path_or_file"
+    rg -H "$pattern" "$path_or_file" | grep "$path_or_file" | cut -d':' -f1 | sort -u
+    # rg -H "$pattern" "$path_or_file"
+  done
 }
 
 vimOpenMatchedFiles() {
   pattern=$1
-  path=$2
-  vim +/"$pattern" $(filesMatch "$pattern" $path)
+  path="$2"
+  vim +/"$pattern" $(filesMatch "$pattern" "$path")
+  # filesMatch "$pattern" "$path"
 }
 
 vimOpenFileAndLocationWithCommands() {
