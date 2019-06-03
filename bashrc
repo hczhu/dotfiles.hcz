@@ -427,3 +427,5 @@ function hgBackOut() {
 alias hg-back-out='hgBackOut'
 
 alias kill-mosh-server='kill $(pidof mosh-server)'
+
+alias hg-unpublish-commit='hg phase -d -f -r'
