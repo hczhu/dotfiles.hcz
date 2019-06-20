@@ -237,7 +237,7 @@ ulimit -c unlimited
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=1000000                   # big big history
 export HISTFILESIZE=10000000              # big big history
