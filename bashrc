@@ -380,7 +380,7 @@ setupSwapFile() {
   sudo swapoff -a
   size_gb=$1
   if [ -z "$size_gb" ]; then
-    size_gb=8
+    size_gb=2
   fi
   sudo fallocate -l ${size_gb}G /swapfile
   sudo dd if=/dev/zero of=/swapfile bs=1024 count=$((size_gb * 1024**3 / 1024))
