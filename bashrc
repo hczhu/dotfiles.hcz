@@ -210,7 +210,7 @@ clangFormat() {
   clang-format-3.9
 }
 
-export PYTHONPATH=$(ls -d /usr/local/lib/python3*/site-packages 2> /dev/null | tail -n1)
+# export PYTHONPATH=$(ls -d /usr/local/lib/python3*/site-packages 2> /dev/null | tail -n1)
 # if ! pgrep -q ssh-agent > /dev/null 2>&1; then
   # ssh-agent -s > /dev/null 2>&1
 # fi
@@ -249,7 +249,7 @@ alias make='make -j $(nproc)'
 [[ -s /home/ubuntu/.autojump/etc/profile.d/autojump.sh ]] && source /home/ubuntu/.autojump/etc/profile.d/autojump.sh
 
 # alias python3='PYTHONPATH=/usr/local/lib/python3.5/dist-packages && python3'
-alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
+# alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
 
 export PATH="$PATH:/usr/local/go/bin:/usr/local/mysql/bin"
 export PATH=$(echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':')
@@ -391,6 +391,10 @@ setupSwapFile() {
     sudo echo -e "/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab
   fi
   sudo swapon --show
+}
+
+deleteSwapFile() {
+  sudo swapoff /swapfile
 }
 
 function searchForSymbol() {
