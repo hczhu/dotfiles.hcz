@@ -429,3 +429,13 @@ alias hg-back-out='hgBackOut'
 alias kill-mosh-server='kill $(pidof mosh-server)'
 alias hg-unpublish-commit='hg phase -d -f -r'
 alias wget-stdout='wget -O -'
+
+upgradeUbuntuRelease() {
+  set -x
+  sudo apt install ubuntu-release-upgrader-core
+  sudo apt-get update
+  sudo apt-get upgrade -y
+  sudo apt-get dist-upgrade
+  sudo do-release-upgrade
+  set +x
+}
