@@ -377,24 +377,29 @@ alias run-ssh-agent='eval $(ssh-agent)'
 alias change-hostname='hostnamectl set-hostname'
 
 setupSwapFile() {
+  set -ex
   sudo swapoff -a
-  size_gb=$1
-  if [ -z "$size_gb" ]; then
-    size_gb=2
+  size_gb=2
+  if [ ! -z "$1" ]; then
+    size_gb=$1
+    shift
   fi
-  sudo fallocate -l ${size_gb}G /swapfile
-  sudo dd if=/dev/zero of=/swapfile bs=1024 count=$((size_gb * 1024**3 / 1024))
-  sudo chmod 600 /swapfile
-  sudo mkswap /swapfile
-  sudo swapon /swapfile
-  if ! grep -q '/swapfile.swap.swap' /etc/fstab; then
-    sudo echo -e "/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab
+  root_dir=""
+  if [ ! -z "$1" ]; then
+    root_dir=$1
+    shift
   fi
+  sudo rm -fr ${root_dir}/swapfile
+  sudo fallocate -l ${size_gb}G ${root_dir}/swapfile
+  sudo dd if=/dev/zero of=${root_dir}/swapfile bs=1024 count=$((size_gb * 1024**3 / 1024))
+  sudo chmod 600 ${root_dir}/swapfile
+  sudo mkswap ${root_dir}/swapfile
+  sudo swapon ${root_dir}/swapfile
+  # if ! grep -q '/swapfile.swap.swap' /etc/fstab; then
+    # sudo echo -e "${root_dir}/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab
+  # fi
   sudo swapon --show
-}
-
-deleteSwapFile() {
-  sudo swapoff /swapfile
+  set +ex
 }
 
 function searchForSymbol() {
@@ -442,4 +447,15 @@ upgradeUbuntuRelease() {
   sudo apt-get dist-upgrade
   sudo do-release-upgrade
   set +x
+}
+
+testDiskWriteRate() {
+  dir=$1
+  dd if=/dev/zero of=${dir} conv=fdatasync bs=384k count=10k
+  rm -f ${dir}
+}
+
+testDiskReadRate() {
+  f=$1
+  dd if=${f} of=/dev/null conv=fdatasync bs=384k count=10k
 }
