@@ -33,9 +33,9 @@ done
 
 echo "Installing Tmux Plugin Manager..."
 
-maybeCreateDir ${HOME}/tmux/plugins
+tmuxPluginDir=${HOME}/.tmux/plugins
+maybeCreateDir ${tmuxPluginDir}
 
-tmuxPluginDir=${HOME}/tmux/plugins
 if [ ! -r ${tmuxPluginDir} ]; then
   mkdir -p ${tmuxPluginDir}
 fi
