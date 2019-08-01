@@ -52,7 +52,7 @@ get_git_branch() {
 function prependIfNotHave() {
   pattern="$1"
   value="$2"
-  if echo "$value" | grep -q "$pattern"; then
+  if echo "${value}" | grep -q "$pattern"; then
     echo "${value}"
   else
     echo "${pattern} ${value}"
@@ -210,7 +210,7 @@ clangFormat() {
   clang-format-3.9
 }
 
-export PYTHONPATH=$(ls -d /usr/local/lib/python3*/site-packages 2> /dev/null | tail -n1)
+# export PYTHONPATH=$(ls -d /usr/local/lib/python3*/site-packages 2> /dev/null | tail -n1)
 # if ! pgrep -q ssh-agent > /dev/null 2>&1; then
   # ssh-agent -s > /dev/null 2>&1
 # fi
@@ -249,7 +249,7 @@ alias make='make -j $(nproc)'
 [[ -s /home/ubuntu/.autojump/etc/profile.d/autojump.sh ]] && source /home/ubuntu/.autojump/etc/profile.d/autojump.sh
 
 # alias python3='PYTHONPATH=/usr/local/lib/python3.5/dist-packages && python3'
-alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
+# alias python2='PYTHONPATH=/usr/local/lib/python2.7/dist-packages && python2'
 
 export PATH="$PATH:/usr/local/go/bin:/usr/local/mysql/bin"
 export PATH=$(echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':')
@@ -377,20 +377,29 @@ alias run-ssh-agent='eval $(ssh-agent)'
 alias change-hostname='hostnamectl set-hostname'
 
 setupSwapFile() {
+  set -ex
   sudo swapoff -a
-  size_gb=$1
-  if [ -z "$size_gb" ]; then
-    size_gb=1
+  size_gb=2
+  if [ ! -z "$1" ]; then
+    size_gb=$1
+    shift
   fi
-  sudo fallocate -l ${size_gb}G /swapfile
-  sudo dd if=/dev/zero of=/swapfile bs=1024 count=$((size_gb * 1024**3 / 1024))
-  sudo chmod 600 /swapfile
-  sudo mkswap /swapfile
-  sudo swapon /swapfile
+  root_dir=""
+  if [ ! -z "$1" ]; then
+    root_dir=$1
+    shift
+  fi
+  sudo rm -fr ${root_dir}/swapfile
+  sudo fallocate -l ${size_gb}G ${root_dir}/swapfile
+  sudo dd if=/dev/zero of=${root_dir}/swapfile bs=1024 count=$((size_gb * 1024**3 / 1024))
+  sudo chmod 600 ${root_dir}/swapfile
+  sudo mkswap ${root_dir}/swapfile
+  sudo swapon ${root_dir}/swapfile
   if ! grep -q '/swapfile.swap.swap' /etc/fstab; then
-    sudo echo -e "/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab
+    sudo echo -e "${root_dir}/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab || true
   fi
   sudo swapon --show
+  set +ex
 }
 
 function searchForSymbol() {
@@ -429,5 +438,29 @@ alias hg-back-out='hgBackOut'
 alias kill-mosh-server='kill $(pidof mosh-server)'
 alias hg-unpublish-commit='hg phase -d -f -r'
 alias wget-stdout='wget -O -'
+<<<<<<< HEAD
 alias jq-multiple-lines='jq --raw-input --slurp'
 alias ps-mem-process='ps -o comm,pid,vsz,rss,%mem -p'
+=======
+
+upgradeUbuntuRelease() {
+  set -x
+  sudo apt install ubuntu-release-upgrader-core
+  sudo apt-get update
+  sudo apt-get upgrade -y
+  sudo apt-get dist-upgrade
+  sudo do-release-upgrade
+  set +x
+}
+
+testDiskWriteRate() {
+  dir=$1
+  dd if=/dev/zero of=${dir} conv=fdatasync bs=384k count=10k
+  rm -f ${dir}
+}
+
+testDiskReadRate() {
+  f=$1
+  dd if=${f} of=/dev/null conv=fdatasync bs=384k count=10k
+}
+>>>>>>> 9f07aeeab7ba1f3f2a135eb1a608c64795546a36
