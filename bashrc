@@ -438,10 +438,8 @@ alias hg-back-out='hgBackOut'
 alias kill-mosh-server='kill $(pidof mosh-server)'
 alias hg-unpublish-commit='hg phase -d -f -r'
 alias wget-stdout='wget -O -'
-<<<<<<< HEAD
 alias jq-multiple-lines='jq --raw-input --slurp'
 alias ps-mem-process='ps -o comm,pid,vsz,rss,%mem -p'
-=======
 
 upgradeUbuntuRelease() {
   set -x
@@ -463,4 +461,3 @@ testDiskReadRate() {
   f=$1
   dd if=${f} of=/dev/null conv=fdatasync bs=384k count=10k
 }
->>>>>>> 9f07aeeab7ba1f3f2a135eb1a608c64795546a36
