@@ -52,7 +52,7 @@ get_git_branch() {
 function prependIfNotHave() {
   pattern="$1"
   value="$2"
-  if echo "$value" | grep -q "$pattern"; then
+  if echo "${value}" | grep -q "$pattern"; then
     echo "${value}"
   else
     echo "${pattern} ${value}"
@@ -395,9 +395,9 @@ setupSwapFile() {
   sudo chmod 600 ${root_dir}/swapfile
   sudo mkswap ${root_dir}/swapfile
   sudo swapon ${root_dir}/swapfile
-  # if ! grep -q '/swapfile.swap.swap' /etc/fstab; then
-    # sudo echo -e "${root_dir}/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab
-  # fi
+  if ! grep -q '/swapfile.swap.swap' /etc/fstab; then
+    sudo echo -e "${root_dir}/swapfile\tswap\tswap\tdefaults\t0\t0" >> /etc/fstab || true
+  fi
   sudo swapon --show
   set +ex
 }

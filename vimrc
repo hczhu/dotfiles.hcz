@@ -124,8 +124,9 @@ iab zhuhcheng@ zhuhcheng@gmail.com
 "python formater
 autocmd FileType *.py smap = :autopep8
 
+let g:clang_format_path = "/usr/bin/clang-format"
 au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
-"au FileType cc,cpp,c,h,hpp vmap = :!clang-format-3.9
+"au FileType cc,cpp,c,h,hpp vmap = :!clang-format
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format<CR>
 :command! -nargs=* -complete=shellcmd Bash vert new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 au FileType cpp,cc,h,tcc vmap = :py3file /usr/local/bin/clang-format.py<CR>
