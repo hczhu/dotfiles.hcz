@@ -18,6 +18,7 @@ set softtabstop=2
 set expandtab
 set smarttab
 set number
+set encoding=utf-8
 
 set showmatch
 set hlsearch
