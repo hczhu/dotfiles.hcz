@@ -1,5 +1,5 @@
 --langdef=thrift
---langmap=thrift:.thrift
+--langmap=thrift:.thrift,c++:+.tcc,python:+(TARGETS)
 --regex-thrift=/^[ \t]*struct[ \t]*([a-zA-Z0-9_]+)/\1/c,classes/
 --regex-thrift=/^[ \t]*typedef[ \t\n]+.*[ \t\n]+([a-zA-Z0-9_]+)$/\1/T,types/
 --regex-thrift=/^[ \t]*enum[ \t]*([a-zA-Z0-9_]+)/\1/T,types/
