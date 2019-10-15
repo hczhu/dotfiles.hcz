@@ -174,6 +174,7 @@ alias perlack-context='perlack -A 3 -B 3'
 
 # to edit command lines
 set -o vi
+alias ctags-r='ctags -R'
 alias ctags-cpp='ctags -R --languages=C++,Thrift'
 alias ctags-cpp-local='ctags-cpp /usr/include /usr/local/include'
 
