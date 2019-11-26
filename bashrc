@@ -466,3 +466,15 @@ testDiskReadRate() {
   f=$1
   dd if=${f} of=/dev/null conv=fdatasync bs=384k count=10k
 }
+
+gdbAllStacks(){
+  if (( $# < 2)); then
+    echo >&2 "Usage: $0 binary_file core_dump_file"
+    return 1
+  fi
+  binary=$1
+  core=$2
+  local tmpfile
+  tmpfile=$(mktemp "${TMPDIR:-/tmp}/gdb.cmd.XXXX")
+  gdb -batch -x ${tmpfile} ${binary} ${core}
+}
