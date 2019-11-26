@@ -174,6 +174,7 @@ alias perlack-context='perlack -A 3 -B 3'
 
 # to edit command lines
 set -o vi
+alias ctags-r='ctags -R'
 alias ctags-cpp='ctags -R --languages=C++,Thrift'
 alias ctags-cpp-local='ctags-cpp /usr/include /usr/local/include'
 
@@ -418,8 +419,11 @@ alias git-st='git st -uno'
 alias cp='cp --backup=numbered'
 alias ln='ln --backup=numbered'
 alias mv='mv -f --backup=numbered'
+
 alias git-submodule-init='git submodule update --init --recursive'
 alias git-submodule-update='git submodule update --remote --merge'
+alias git-add-submodule='git submodule add'
+
 alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
 alias cron-edit='crontab -e'
 alias datadog-restart='sudo systemctl restart datadog-agent'
