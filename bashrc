@@ -478,3 +478,8 @@ gdbAllStacks(){
   tmpfile=$(mktemp "${TMPDIR:-/tmp}/gdb.cmd.XXXX")
   gdb -batch -x ${tmpfile} ${binary} ${core}
 }
+
+addSshKeyToAgnet() {
+  eval "$(ssh-agent -s)"
+  ssh-add ${1}
+}
