@@ -34,23 +34,25 @@ set foldmethod=indent
 set scrolloff=100
 "Use clipboard as default copy
 set clipboard=unnamedplus
-" mystuff
-au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap "" ""<Esc>ha
-au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap () ()<Esc>ha
-au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap [] []<Esc>ha
-au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap <> <><Esc>ha
-au FileType go,sh,html,js,php,cc,lex,cpp,c,java,python imap '' ''<Esc>ha
-au FileType go,sh,html,js,php,cc,lex,cpp,c,java imap { {<CR>}<Esc>O
-"au FileType js,php,cpp,c,java,python map <C-r> :!gedit %<CR>
+
+map I{ iaa<Esc>hr{lr}a
+au FileType go,bash,html,js,php,cc,lex,cpp,c,java,python,bash imap "" ""<Esc>ha
+au FileType go,bash,html,js,php,cc,lex,cpp,c,java,python,bash imap () ()<Esc>ha
+au FileType go,bash,html,js,php,cc,lex,cpp,c,java,python,bash imap [] []<Esc>ha
+au FileType go,bash,html,js,php,cc,lex,cpp,c,java,python,bash imap <> <><Esc>ha
+au FileType go,bash,html,js,php,cc,lex,cpp,c,java,python,bash imap '' ''<Esc>ha
+au FileType go,js,cc,lex,cpp,c,java imap { {<CR>}<Esc>O
+au FileType bash imap {} {}<Esc>ha
+"au FileType js,php,cpp,c,java,python,bash map <C-r> :!gedit %<CR>
 map <F6> <Esc>elDyyp0dwi<BS> = vars.<Esc>j
-au FileType js,php,cpp,python map <F3> <Esc>0dwi<BS><Esc>
-"au FileType js,php,cpp,python map <F4> 0dwi<BS><CR><Esc>
+au FileType js,php,cpp,python,bash map <F3> <Esc>0dwi<BS><Esc>
+"au FileType js,php,cpp,python,bash map <F4> 0dwi<BS><CR><Esc>
 
 au FileType js,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
 au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -ggdb3 -DDEBUG $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
 
-au FileType js,php,cpp,c map <F5> :!./%:r
-au FileType js,php,python map <F5> :!./%
+au FileType js,php,cpp,c,python,bash map <F5> :!./%:r
+au FileType js,php,python,bash map <F5> :!./%
 "
 "au FileType js,php,cpp map <C-u> :w<CR>:!g++ -o %:r -O2 -DNDEBUG -lprofiler -lpthread %;echo "No debug\!\!\!"
 "au FileType js,php,cpp map <C-u> :w<CR>:!g++ -o %:r -O2 -DNDEBUG %;echo "No debug\!\!\!"<CR>
@@ -81,7 +83,6 @@ command Fl !grep "^DEFINE_[a-zA-Z0-9]\+($(echo <cword> | sed 's/FLAGS_//')" % -A
 map Va wbveyea <CR><Esc>O<Esc>p:.s/\([a-z]\)\([A-Z]\)/\1_\2/g<CR>VuA <Esc>JkJ
 map Vc wbve:s/_\([a-z]\)/\u\1/g<CR>
 map Fl wbiFLAGS_<Esc>
-map I{ iaa<Esc>hr{lr}a
 "map <C-s> :!look <cword>
 "command Backup !suffix=`date | tr ' ' '-'`; echo $suffix; cp % .%-$suffix 
 

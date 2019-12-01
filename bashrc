@@ -421,8 +421,11 @@ alias git-st='git st -uno'
 alias cp='cp --backup=numbered'
 alias ln='ln --backup=numbered'
 alias mv='mv -f --backup=numbered'
+
 alias git-submodule-init='git submodule update --init --recursive'
 alias git-submodule-update='git submodule update --remote --merge'
+alias git-add-submodule='git submodule add'
+
 alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
 alias cron-edit='crontab -e'
 alias datadog-restart='sudo systemctl restart datadog-agent'
@@ -476,4 +479,9 @@ gdbAllStacks(){
   local tmpfile
   tmpfile=$(mktemp "${TMPDIR:-/tmp}/gdb.cmd.XXXX")
   gdb -batch -x ${tmpfile} ${binary} ${core}
+}
+
+addSshKeyToAgnet() {
+  eval "$(ssh-agent -s)"
+  ssh-add ${1}
 }
