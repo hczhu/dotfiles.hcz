@@ -64,5 +64,5 @@
 	email = hczhu.mtv@gmail.com
 
 [credential]
-    # helper = store --file /mnt/thumbdrive/.git-credentials
-    helper = cache --timeout 3600
+  # helper = store --file /mnt/thumbdrive/.git-credentials
+  helper = cache --timeout 3600
