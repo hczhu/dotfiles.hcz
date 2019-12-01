@@ -219,6 +219,8 @@ clangFormat() {
 alias mysql-start='sudo /etc/init.d/mysql start'
 alias mysql-stop='sudo /etc/init.d/mysql stop'
 alias mysql-shell='mysql'
+# Always output in table format
+alias mysql='mysql -t'
 alias cpu-num='echo $(nproc)'
 
 export LD_LIBRARY_PATH='/usr/local/lib:/lib:/lib64:/usr/lib'

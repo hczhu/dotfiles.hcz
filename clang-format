@@ -18,7 +18,6 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
-DerivePointerAlignment: false
 ExperimentalAutoDetectBinPacking: true
 IndentCaseLabels: false
 IndentFunctionDeclarationAfterType: false
@@ -32,7 +31,6 @@ PenaltyBreakFirstLessLess: 20
 PenaltyBreakString: 1000
 PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 200
-PointerAlignment: Right
 SpaceAfterControlStatementKeyword: true
 SpaceBeforeAssignmentOperators: true
 SpaceInEmptyParentheses: false
@@ -43,4 +41,6 @@ SpacesInParentheses: false
 Standard:        Cpp11
 TabWidth:        8
 UseTab:          Never
+DerivePointerAlignment: false
+PointerAlignment: Left
 ...
