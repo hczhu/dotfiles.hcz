@@ -62,7 +62,8 @@ function prependIfNotHave() {
 export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
 # export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
-export PS1='[\u@\h \w$(get_git_branch)] ';
+# export PS1='[\u@\h \w$(get_git_branch)] ';
+export PS1='[\u@\h \w] ';
 
 # Input method
 #export XIM="SCIM"
@@ -487,3 +488,14 @@ addSshKeyToAgnet() {
 }
 
 alias conda-disable-auto-activate='conda config --set auto_activate_base false'
+
+alias hg-draft-commit='hg phase --draft --force .'
+
+alias conda-pytorch='conda create -yn pytorch python=3'
+
+alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
+
+ptBuildBin() {
+  cd build && ninja bin/${1} && cd -
+}
+alias pt-build-bin='ptBuildBin'
