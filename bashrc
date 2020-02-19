@@ -62,7 +62,8 @@ function prependIfNotHave() {
 export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
 # export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
-export PS1='[\u@\h \w$(get_git_branch)] ';
+# export PS1='[\u@\h \w$(get_git_branch)] ';
+export PS1='[\u@\h \w] ';
 
 # Input method
 #export XIM="SCIM"
@@ -485,3 +486,20 @@ addSshKeyToAgnet() {
   eval "$(ssh-agent -s)"
   ssh-add ${1}
 }
+
+alias hg-draft-commit='hg phase --draft --force .'
+alias pytorch-ipy='buck-out/gen/pytorch/ifbpy.par'
+alias pytorch-notebook='buck-out/gen/pytorch/ifbpy.par notebook'
+
+alias with-proxy="https_proxy=http://fwdproxy:8080 http_proxy=http://fwdproxy:8080"
+
+alias conda-pytorch='with-proxy conda create -yn pytorch python=3.6'
+
+alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
+
+alias conda-install='with-proxy conda install'
+
+ptBuildBin() {
+  cd build && ninja bin/${1} && cd -
+}
+alias pt-build-bin='ptBuildBin'
