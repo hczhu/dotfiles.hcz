@@ -485,3 +485,5 @@ addSshKeyToAgnet() {
   eval "$(ssh-agent -s)"
   ssh-add ${1}
 }
+
+alias conda-disable-auto-activate='conda config --set auto_activate_base false'
