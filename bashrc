@@ -62,8 +62,8 @@ function prependIfNotHave() {
 export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
 # export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
-# export PS1='[\u@\h \w$(get_git_branch)] ';
-export PS1='[\u@\h \w] ';
+export PS1='[\u@\h \w$(get_git_branch)] ';
+# export PS1='[\u@\h \w] ';
 
 # Input method
 #export XIM="SCIM"
@@ -498,6 +498,10 @@ alias conda-pytorch='with-proxy conda create -yn pytorch python=3.6'
 alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
 
 alias conda-install='with-proxy conda install'
+
+alias git-diff-files='git diff --name-only'
+alias git-diff-files-head='git-diff-files HEAD^ HEAD'
+alias git-branch-track-remote='git branch --set-upstream-to'
 
 ptBuildBin() {
   cd build && ninja bin/${1} && cd -
