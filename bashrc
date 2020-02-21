@@ -62,8 +62,8 @@ function prependIfNotHave() {
 export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
 # export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
-# export PS1='[\u@\h \w$(get_git_branch)] ';
-export PS1='[\u@\h \w] ';
+export PS1='[\u@\h \w$(get_git_branch)] ';
+# export PS1='[\u@\h \w] ';
 
 # Input method
 #export XIM="SCIM"
