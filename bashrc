@@ -487,17 +487,14 @@ addSshKeyToAgnet() {
   ssh-add ${1}
 }
 
+alias conda-disable-auto-activate='conda config --set auto_activate_base false'
+
 alias hg-draft-commit='hg phase --draft --force .'
-alias pytorch-ipy='buck-out/gen/pytorch/ifbpy.par'
-alias pytorch-notebook='buck-out/gen/pytorch/ifbpy.par notebook'
 
-alias with-proxy="https_proxy=http://fwdproxy:8080 http_proxy=http://fwdproxy:8080"
-
-alias conda-pytorch='with-proxy conda create -yn pytorch python=3.6'
+alias conda-pytorch='conda create -yn pytorch python=3'
 
 alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
 
-alias conda-install='with-proxy conda install'
 
 alias git-diff-files='git diff --name-only'
 alias git-diff-files-head='git-diff-files HEAD^ HEAD'
