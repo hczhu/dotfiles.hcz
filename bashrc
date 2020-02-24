@@ -499,6 +499,7 @@ alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
 alias git-diff-files='git diff --name-only'
 alias git-diff-files-head='git-diff-files HEAD^ HEAD'
 alias git-branch-track-remote='git branch --set-upstream-to'
+alias git-more-branch-head='git branch -f'
 
 ptBuildBin() {
   cd build && ninja bin/${1} && cd -
