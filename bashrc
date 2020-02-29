@@ -449,6 +449,9 @@ alias wget-stdout='wget -O -'
 alias jq-multiple-lines='jq --raw-input --slurp'
 alias ps-mem-process='ps -o comm,pid,vsz,rss,%mem -p'
 
+alias rg-file-name-only='rg -l'
+alias grep-file-name-only='grep -l'
+
 upgradeUbuntuRelease() {
   set -x
   sudo apt install ubuntu-release-upgrader-core
@@ -494,6 +497,7 @@ alias hg-draft-commit='hg phase --draft --force .'
 alias conda-pytorch='conda create -yn pytorch python=3'
 
 alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
+alias ctags-pytorch='ctags-cpp-py --exclude=third_party --exclude=test/*\.py .'
 
 
 alias git-diff-files='git diff --name-only'
