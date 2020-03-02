@@ -194,9 +194,11 @@ hgReverCommit() {
 
 # export LD_LIBRARY_PATH='/usr/local/lib:/lib:/lib64:/usr/lib'
 alias nm='nm --demangle'
-export CPP_LIBS='-lthrift -lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_thread -lboost_atomic -lpthread -ldouble-conversion -lglog -levent -lssl -lcrypto -ldouble-conversion -lglog -lgflags -lpthread -levent -lssl -lcrypto -lz -llzma -llz4 -lzstd -lsnappy -liberty -ldl -lpthread -lgmock -lgtest' 
+export CPP_LIBS='-lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_thread -lboost_atomic -lpthread -ldouble-conversion -lglog -levent -lssl -lcrypto -ldouble-conversion -lglog -lgflags -lpthread -levent -lssl -lcrypto -lz -llzma -llz4 -lzstd -lsnappy -liberty -ldl -lpthread -lgmock -lgtest' 
 export ADV_CPP_LIBS="-lproxygenhttpserver -lproxygenlib -Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 $CPP_LIBS"
 export GCC_FLAGS='-g -std=gnu++17 -Wall -Wno-deprecated -Wdeprecated-declarations -Wno-error=deprecated-declarations -Wno-sign-compare -Wno-unused -Wunused-label -Wunused-result -Wnon-virtual-dtor -fopenmp'
+
+export GTEST_LIBS='-lgtest -lglog -gflags'
 
 # -lgmock_main -lgtest_main
 
@@ -451,6 +453,9 @@ alias wget-stdout='wget -O -'
 alias jq-multiple-lines='jq --raw-input --slurp'
 alias ps-mem-process='ps -o comm,pid,vsz,rss,%mem -p'
 
+alias rg-file-name-only='rg -l'
+alias grep-file-name-only='grep -l'
+
 upgradeUbuntuRelease() {
   set -x
   sudo apt install ubuntu-release-upgrader-core
@@ -496,12 +501,15 @@ alias hg-draft-commit='hg phase --draft --force .'
 alias conda-pytorch='conda create -yn pytorch python=3'
 
 alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
+alias ctags-pytorch='ctags-cpp-py --exclude=third_party --exclude=test/*\.py .'
 
 
 alias git-diff-files='git diff --name-only'
 alias git-diff-files-head='git-diff-files HEAD^ HEAD'
 alias git-branch-track-remote='git branch --set-upstream-to'
 alias pytorch-bash='DISABLE_BASHRC=y scl enable devtoolset-8 bash && conda activate pytorch'
+alias git-more-branch-head='git branch -f'
+alias pytorch-bash='scl enable devtoolset-8 bash'
 
 ptBuildBin() {
   cd build && ninja bin/${1} && cd -
