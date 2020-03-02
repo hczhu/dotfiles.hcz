@@ -504,6 +504,11 @@ alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
 alias ctags-pytorch='ctags-cpp-py --exclude=third_party --exclude=test/*\.py .'
 
 
+gitDiffWithHead() {
+  git diff ${1} HEAD
+}
+
+alias git-diff='gitDiffWithHead'
 alias git-diff-files='git diff --name-only'
 alias git-diff-files-head='git-diff-files HEAD^ HEAD'
 alias git-branch-track-remote='git branch --set-upstream-to'
