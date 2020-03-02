@@ -429,7 +429,7 @@ alias git-submodule-update='git submodule update --remote --merge'
 alias git-add-submodule='git submodule add'
 
 alias git-new-br='git checkout --track origin/master -b'
-alias git-push-force-to-my-branch='git -f'
+alias git-push-force-to-my-branch='git push -f'
 
 alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
 alias cron-edit='crontab -e'
