@@ -48,8 +48,8 @@ map <F6> <Esc>elDyyp0dwi<BS> = vars.<Esc>j
 au FileType js,php,cpp,python,bash map <F3> <Esc>0dwi<BS><Esc>
 "au FileType js,php,cpp,python,bash map <F4> 0dwi<BS><CR><Esc>
 
-au FileType js,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
-au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -ggdb3 -DDEBUG $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
+au FileType js,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS ${GTEST_LIBS} -o %:r && ./%:r
+au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -ggdb3 -DDEBUG $GCC_FLAGS ${GTEST_LIBS} -o %:r && ./%:r
 
 au FileType js,php,cpp,c,python,bash map <F5> :!./%:r
 au FileType js,php,python,bash map <F5> :!./%
