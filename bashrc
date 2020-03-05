@@ -104,7 +104,6 @@ alias ts='date +%s'
 # example: ds -d '7 days ago'
 alias ds='date +%Y-%m-%d'
 
-alias git-new-br='git checkout --track origin/master -b'
 
 # record screen output
 #if [ "$SCREEN_RECORDED" = "" ]; then
@@ -195,9 +194,11 @@ hgReverCommit() {
 
 # export LD_LIBRARY_PATH='/usr/local/lib:/lib:/lib64:/usr/lib'
 alias nm='nm --demangle'
-export CPP_LIBS='-lthrift -lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_thread -lboost_atomic -lpthread -ldouble-conversion -lglog -levent -lssl -lcrypto -ldouble-conversion -lglog -lgflags -lpthread -levent -lssl -lcrypto -lz -llzma -llz4 -lzstd -lsnappy -liberty -ldl -lpthread -lgmock -lgtest' 
+export CPP_LIBS='-lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_regex -lboost_system -lboost_thread -lboost_atomic -lpthread -ldouble-conversion -lglog -levent -lssl -lcrypto -ldouble-conversion -lglog -lgflags -lpthread -levent -lssl -lcrypto -lz -llzma -llz4 -lzstd -lsnappy -liberty -ldl -lpthread -lgmock -lgtest' 
 export ADV_CPP_LIBS="-lproxygenhttpserver -lproxygenlib -Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 $CPP_LIBS"
 export GCC_FLAGS='-g -std=gnu++17 -Wall -Wno-deprecated -Wdeprecated-declarations -Wno-error=deprecated-declarations -Wno-sign-compare -Wno-unused -Wunused-label -Wunused-result -Wnon-virtual-dtor -fopenmp'
+
+export GTEST_LIBS='-lgtest -lglog -gflags'
 
 # -lgmock_main -lgtest_main
 
@@ -427,6 +428,9 @@ alias git-submodule-init='git submodule update --init --recursive'
 alias git-submodule-update='git submodule update --remote --merge'
 alias git-add-submodule='git submodule add'
 
+alias git-new-br='git checkout --track origin/master -b'
+alias git-push-force-to-my-branch='git push -f'
+
 alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
 alias cron-edit='crontab -e'
 alias datadog-restart='sudo systemctl restart datadog-agent'
@@ -500,9 +504,15 @@ alias git-pt-branch='git checkout -b myfeature origin/fbcode/warm'
 alias ctags-pytorch='ctags-cpp-py --exclude=third_party --exclude=test/*\.py .'
 
 
+gitDiffWithHead() {
+  git diff ${1} HEAD
+}
+
+alias git-diff='gitDiffWithHead'
 alias git-diff-files='git diff --name-only'
 alias git-diff-files-head='git-diff-files HEAD^ HEAD'
 alias git-branch-track-remote='git branch --set-upstream-to'
+alias pytorch-bash='DISABLE_BASHRC=y scl enable devtoolset-8 bash && conda activate pytorch'
 alias git-more-branch-head='git branch -f'
 alias pytorch-bash='scl enable devtoolset-8 bash'
 
