@@ -126,12 +126,21 @@ iab zhuhcheng@ zhuhcheng@gmail.com
 "python formater
 autocmd FileType *.py smap = :autopep8
 
-let g:clang_format_path = "/usr/bin/clang-format"
-au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
+let g:clang_formater = "/usr/bin/clang-format"
+let g:clang_formater_py = "/usr/local/bin/clang-format.py"
+
+if !empty(glob(g:clang_formater_py))
+  execute "au FileType cpp,cc,h,tcc,c vmap = :py3file " .g:clang_formater_py . "<CR>"
+elif !empty(glob(g:clang_formater))
+  execute "au FileType cpp,cc,h,tcc,c vmap = :" .g:clang_formater . "<CR>"
+endif
+
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format<CR>
+
+
+au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
 :command! -nargs=* -complete=shellcmd Bash vert new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
-au FileType cpp,cc,h,tcc vmap = :py3file /usr/local/bin/clang-format.py<CR>
 
 autocmd FileType python setlocal tabstop=4
 
