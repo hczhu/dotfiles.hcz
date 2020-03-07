@@ -131,7 +131,7 @@ let g:clang_formater_py = "/usr/local/bin/clang-format.py"
 
 if !empty(glob(g:clang_formater_py))
   execute "au FileType cpp,cc,h,tcc,c vmap = :py3file " .g:clang_formater_py . "<CR>"
-elif !empty(glob(g:clang_formater))
+elseif !empty(glob(g:clang_formater))
   execute "au FileType cpp,cc,h,tcc,c vmap = :" .g:clang_formater . "<CR>"
 endif
 
