@@ -119,6 +119,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 au FocusLost * silent! wa
 
 command GenerateTags !ctags -R *
+command TermCat term cat "#1"
 
 "automatic completion & correction
 iab zhuhcheng@ zhuhcheng@gmail.com
