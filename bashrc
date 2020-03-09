@@ -37,13 +37,16 @@ set_git_branch() {
   export GIT_BRANCH=$(get_git_branch)
 }
 
+export REPO_BRANCH=""
+
 get_git_branch() {
   if [ -r '.git' ]; then 
     tag=$(git branch 2> /dev/null | grep \* | cut -d' ' -f2)
   elif [ -r '.hg' -o -r '../.hg' ]; then
     tag=$(hg bookmark 2> /dev/null | grep \* | cut -d' ' -f3)
   fi
-  echo $(echo "(${tag})" | sed 's/\n/ /g;s/\t/ /g;')
+  REPO_BRANCH=$(echo "(${tag})" | sed 's/\n/ /g;s/\t/ /g;')
+  echo ${REPO_BRANCH}
 }
 
 # PROMPT_COMMAND="set_git_branch; $PROMPT_COMMAND"
@@ -413,6 +416,7 @@ function searchForSymbol() {
 
 alias git-ci='git commit -am'
 alias git-ci-push='git-ci "update" && git push'
+alias git-amend='git commit -a --amend'
 
 portListener() {
   sudo lsof -i :$1
