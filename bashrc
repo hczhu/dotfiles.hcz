@@ -201,7 +201,7 @@ export CPP_LIBS='-lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time
 export ADV_CPP_LIBS="-lproxygenhttpserver -lproxygenlib -Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 $CPP_LIBS"
 export GCC_FLAGS='-g -std=gnu++17 -Wall -Wno-deprecated -Wdeprecated-declarations -Wno-error=deprecated-declarations -Wno-sign-compare -Wno-unused -Wunused-label -Wunused-result -Wnon-virtual-dtor -fopenmp'
 
-export GTEST_LIBS='-lgtest -lglog -gflags'
+export GTEST_LIBS='-lgtest -lglog -lgflags'
 
 # -lgmock_main -lgtest_main
 
@@ -417,6 +417,7 @@ function searchForSymbol() {
 alias git-ci='git commit -am'
 alias git-ci-push='git-ci "update" && git push'
 alias git-amend='git commit -a --amend'
+alias git-add-interactive='git add -p'
 
 portListener() {
   sudo lsof -i :$1

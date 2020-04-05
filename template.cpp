@@ -40,6 +40,12 @@ void _displayType(T&& t);
 
 #define PEEK(x) LOG(INFO) << #x << ": [" << (x) << "]"
 
+#define TO_STR(x) #x
+
+#define STR(x) #x
+
+#pragma message("Start from here")
+
 /* template end */
 
 class FooTest : public testing::Test {
