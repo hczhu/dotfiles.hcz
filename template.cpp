@@ -42,9 +42,13 @@ void _displayType(T&& t);
 
 #define TO_STR(x) #x
 
-#define STR(x) #x
+#define _STR(x) #x
+#define STR(x) _STR(x)
 
-#pragma message("Start from here")
+#define PRINT_MACRO(M) static_assert(0, "Macro " #M " = " STR(M))
+
+// #define x 42
+// PRINT_MACRO(x);
 
 /* template end */
 
