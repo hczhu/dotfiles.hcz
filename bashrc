@@ -34,7 +34,7 @@ settitle() {
 
 
 set_git_branch() {
-  export GIT_BRANCH=$(get_git_branch)
+  export GIT_BRANCH="($(get_git_branch))"
 }
 
 export REPO_BRANCH=""
@@ -45,7 +45,7 @@ get_git_branch() {
   elif [ -r '.hg' -o -r '../.hg' ]; then
     tag=$(hg bookmark 2> /dev/null | grep \* | cut -d' ' -f3)
   fi
-  REPO_BRANCH=$(echo "(${tag})" | sed 's/\n/ /g;s/\t/ /g;')
+  REPO_BRANCH=$(echo "${tag}" | sed 's/\n/ /g;s/\t/ /g;')
   echo ${REPO_BRANCH}
 }
 
@@ -65,7 +65,7 @@ function prependIfNotHave() {
 export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -n;" "$PROMPT_COMMAND")
 # export PROMPT_COMMAND=$(prependIfNotHave "history -a; history -c; history -r;" "$PROMPT_COMMAND")
 
-export PS1='[\u@\h \w$(get_git_branch)] ';
+export PS1='[\u@\h \w($(get_git_branch))] ';
 # export PS1='[\u@\h \w] ';
 
 # Input method
@@ -516,8 +516,12 @@ alias git-diff='gitDiffWithHead'
 alias git-diff-files='git diff --name-only'
 alias git-diff-files-head='git-diff-files HEAD^ HEAD'
 alias git-branch-track-remote='git branch --set-upstream-to'
+alias git-push-to-origin='git push -f origin $(get_git_branch)'
+
+
 alias pytorch-bash='DISABLE_BASHRC=y scl enable devtoolset-8 bash && conda activate pytorch'
 alias git-more-branch-head='git branch -f'
+
 alias pytorch-bash='scl enable devtoolset-8 bash'
 
 ptBuildBin() {
