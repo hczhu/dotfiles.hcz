@@ -485,3 +485,11 @@ addSshKeyToAgnet() {
   eval "$(ssh-agent -s)"
   ssh-add ${1}
 }
+
+randomInt64() {
+  N=${1}
+  if [ -z "${N}" ]; then
+    N=1
+  fi
+  shuf --head-count=$N --input-range=1-$(echo 2^64-1|bc)
+}
