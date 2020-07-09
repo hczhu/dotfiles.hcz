@@ -40,6 +40,13 @@ void _displayType(T&& t);
 
 #define PEEK(x) LOG(INFO) << #x << ": [" << (x) << "]"
 
+#define _STR(x) #x
+#define STR(x) _STR(x)
+#define PRINT_MACRO(M) static_assert(0, "Macro " #M " = " STR(M))
+
+// #define x 42
+// PRINT_MACRO(x);
+
 /* template end */
 
 class FooTest : public testing::Test {

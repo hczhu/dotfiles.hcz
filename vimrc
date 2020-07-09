@@ -48,8 +48,8 @@ map <F6> <Esc>elDyyp0dwi<BS> = vars.<Esc>j
 au FileType js,php,cpp,python,bash map <F3> <Esc>0dwi<BS><Esc>
 "au FileType js,php,cpp,python,bash map <F4> 0dwi<BS><CR><Esc>
 
-au FileType js,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
-au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -ggdb3 -DDEBUG $GCC_FLAGS $CPP_LIBS -o %:r && ./%:r
+au FileType js,php,cpp map <C-y> :w<CR>:!g++ % -O3 $GCC_FLAGS ${GTEST_LIBS} -o %:r && ./%:r
+au FileType js,php,cpp map <C-u> :w<CR>:!g++ % -ggdb3 -DDEBUG $GCC_FLAGS ${GTEST_LIBS} -o %:r && ./%:r
 
 au FileType js,php,cpp,c,python,bash map <F5> :!./%:r
 au FileType js,php,python,bash map <F5> :!./%
@@ -119,6 +119,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 au FocusLost * silent! wa
 
 command GenerateTags !ctags -R *
+command TermCat term cat "#1"
 
 "automatic completion & correction
 iab zhuhcheng@ zhuhcheng@gmail.com
@@ -126,12 +127,21 @@ iab zhuhcheng@ zhuhcheng@gmail.com
 "python formater
 autocmd FileType *.py smap = :autopep8
 
-let g:clang_format_path = "/usr/bin/clang-format"
-au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
+let g:clang_formater = "/usr/bin/clang-format"
+let g:clang_formater_py = "/usr/local/bin/clang-format.py"
+
+if !empty(glob(g:clang_formater_py))
+  execute "au FileType cpp,cc,h,tcc,c vmap = :py3file " .g:clang_formater_py . "<CR>"
+elseif !empty(glob(g:clang_formater))
+  execute "au FileType cpp,cc,h,tcc,c vmap = :" .g:clang_formater . "<CR>"
+endif
+
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format
 "au FileType cc,cpp,c,h,hpp vmap = :!clang-format<CR>
+
+
+au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
 :command! -nargs=* -complete=shellcmd Bash vert new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
-au FileType cpp,cc,h,tcc vmap = :py3file /usr/local/bin/clang-format.py<CR>
 
 autocmd FileType python setlocal tabstop=4
 
