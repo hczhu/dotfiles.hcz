@@ -535,3 +535,5 @@ ptBuildBin() {
   cd build && ninja bin/${1} && cd -
 }
 alias pt-build-bin='ptBuildBin'
+
+alias mysql-batch='mysql -N -B -e'
