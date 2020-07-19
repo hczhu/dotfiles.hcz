@@ -434,7 +434,6 @@ alias git-submodule-update='git submodule update --remote --merge'
 alias git-add-submodule='git submodule add'
 
 alias git-new-br='git checkout --track origin/master -b'
-alias git-push-force-to-my-branch='git push -f'
 
 alias lighttpd-restart='sudo /etc/init.d/lighttpd restart'
 alias cron-edit='crontab -e'
@@ -547,3 +546,4 @@ memStats() {
 }
 
 alias drop-cache-mem='sudo sh -c "/bin/echo 3 > /proc/sys/vm/drop_caches "'
+alias mysql-batch='mysql -N -B -e'
