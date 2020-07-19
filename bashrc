@@ -536,3 +536,14 @@ ptBuildBin() {
   cd build && ninja bin/${1} && cd -
 }
 alias pt-build-bin='ptBuildBin'
+
+memStats() {
+  echo "------ free -m --------"
+  free -m
+  echo "---- vmstat -S M -------"
+  vmstat -S M
+  echo "------ Top processes by RSS --------"
+  ps-top-mem 5
+}
+
+alias drop-cache-mem='sudo sh -c "/bin/echo 3 > /proc/sys/vm/drop_caches "'
