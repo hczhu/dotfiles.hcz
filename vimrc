@@ -143,7 +143,9 @@ endif
 au BufNewFile *.cc,*.cpp :r !cat $HOME/.template.cpp 2> /dev/null
 :command! -nargs=* -complete=shellcmd Bash vert new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 
-autocmd FileType python setlocal tabstop=4
+autocmd FileType python,py setlocal tabstop=4
+
+autocmd FileType javascript,js,jsx setlocal shiftwidth=4 tabstop=4
 
 " make :!cmd behaves the same as in Shell
 " set shellcmdflag=-ic
