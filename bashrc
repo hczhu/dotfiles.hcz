@@ -201,7 +201,7 @@ export CPP_LIBS='-lfolly -lcurl -lboost_context -lboost_chrono -lboost_date_time
 export ADV_CPP_LIBS="-lproxygenhttpserver -lproxygenlib -Wl,--start-group -lthriftcpp2 -lasync -lconcurrency -lprotocol -lsecurity -lserver -lthrift -lthrift-core -lthriftfrozen2 -lthriftprotocol -ltransport -Wl,--end-group -lReactiveSocket -lyarpl -lwangle -lgssapi_krb5 $CPP_LIBS"
 export GCC_FLAGS='-g -std=gnu++17 -Wall -Wno-deprecated -Wdeprecated-declarations -Wno-error=deprecated-declarations -Wno-sign-compare -Wno-unused -Wunused-label -Wunused-result -Wnon-virtual-dtor -fopenmp'
 
-export GTEST_LIBS='-lgtest -lglog -lgflags'
+export GTEST_LIBS='-lgtest -lglog -lgflags -lunwind'
 
 # -lgmock_main -lgtest_main
 
@@ -411,8 +411,18 @@ setupSwapFile() {
   set +ex
 }
 
-function searchForSymbol() {
-  for lib in $(ls /usr/local/lib/lib*.a); do echo $lib; nm -C --defined-only $lib | grep "$1"; done | less -r
+gccLibsDirs() {
+  ld --verbose | grep SEARCH_DIR | sed -b 's/SEARCH_DIR("=\([^"]\+\)");/\1/g'
+}
+
+function searchForCppSymbol() {
+  for d in $(gccLibsDirs); do
+    if [ -r ${d} ]; then
+      for lib in $(find "${d}" -regex ".*\.so$\|.*\.a$"); do
+        nm -A -C --defined-only "${lib}" 2> /dev/null | grep "${1}"
+      done
+    fi
+  done | less -r
 }
 
 alias git-ci='git commit -am'
@@ -548,3 +558,12 @@ memStats() {
 
 alias drop-cache-mem='sudo sh -c "/bin/echo 3 > /proc/sys/vm/drop_caches "'
 alias mysql-batch='mysql -N -B -e'
+
+alias gcc-compilation-config='echo | gcc -x c++ -E -Wp,-v - >/dev/null'
+alias gcc-lib-dirs='gccLibs'
+
+serviceLogs() {
+  sudo journalctl --unit=${1}
+}
+
+alias service-logs=serviceLogs
