@@ -563,7 +563,7 @@ alias gcc-compilation-config='echo | gcc -x c++ -E -Wp,-v - >/dev/null'
 alias gcc-lib-dirs='gccLibs'
 
 serviceLogs() {
-  sudo journalctl --unit="*${1}*"
+  sudo journalctl --unit="*${1}*" -n 400
 }
 
 alias service-logs=serviceLogs
