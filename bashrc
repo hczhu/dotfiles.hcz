@@ -568,3 +568,4 @@ serviceLogs() {
 }
 
 alias service-logs=serviceLogs
+alias batch_mysql='mysql -N -B -e'
